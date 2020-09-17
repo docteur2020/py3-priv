@@ -1,0 +1,7 @@
+pytho
+
+con_get_NextPo_cur=connexion(equipement('TIGR4-ODIN-CLS-K2'),None,None,None,'SSH',"TMP/"+"_shNextPo_"+'TIGR4-ODIN-CLS-K2'.lower()+".log","TMP","shNextPo",timeout=300,verbose=False)
+
+from ParsingShow import ParseShNextPo
+
+PoID=con_get_NextPo_cur.launch_withParser(ParseShNextPo)

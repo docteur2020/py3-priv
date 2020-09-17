@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+# coding: utf-8
+
+
+from ParsingShow import ParseIpRoute,writeCsv
+import csv
+import checkroute
+import sys
+import os
+import argparse
+
+if __name__ == '__main__':
+	"Fonction principale"
+	
+	parser = argparse.ArgumentParser()
+	group1=parser.add_mutually_exclusive_group(required=True)
+	group2=parser.add_mutually_exclusive_group(required=False)
+	group1.add_argument("-r", "--repertoire",action="store",help="Repertoire contenant les output show cdp neighbor detail")
+	group1.add_argument("-d", "--dumpfile",action="store",help="Contient le fichier dump type cdp")
+	parser.add_argument("-e", "--exportcsv",action="store",help="Résultat sous forme fichier csv",required=False)
+	args = parser.parse_args()
