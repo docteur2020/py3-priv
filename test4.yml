@@ -1,0 +1,16 @@
+---
+- name: TEST2
+  hosts: cisco_group
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: GET SH IP INT BRIEF
+      ntc_show_command:
+        connection: ssh
+        template_dir: /home/vv5347/ENG/ntc-ansible/ntc-templates/templates/
+        platform: cisco_ios
+        command: show ip interface brief
+        host: 10.91.109.24
+        username: vv5347
+        password: Oclo2hvr!

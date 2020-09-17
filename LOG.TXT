@@ -1,0 +1,8480 @@
+^vrf VPN0116
+re.compile('^vrf VPN0116', re.MULTILINE)
+---------------------------------
+Equipement:GSBEDCC2-PE101101
+---------------------------------
+matche pas:
+
+None
+matche pas:
+s
+None
+matche pas:
+h run
+
+
+None
+matche pas:
+T
+None
+matche pas:
+ue Oct 25 13:49:18.230 CEST
+
+None
+matche pas:
+B
+None
+matche pas:
+uilding configuration...
+!! IOS XR Configuration 5.3.3
+!! Last configuration change at Tue Oct 25 06:20:35 2016 by cgl317
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+h
+None
+matche pas:
+ostname GSBEDCC2-PE101101
+
+None
+matche pas:
+c
+None
+matche pas:
+lock timezone CET 1
+
+None
+matche pas:
+c
+None
+matche pas:
+lock summer-time CEST recurring last sunday march 02:00 last sunday october 03:00
+
+None
+matche pas:
+b
+None
+matche pas:
+anner exec #
+
+********************************************************************************
+**                                                                            **
+**                       UNAUTHORISED ACCESS PROHIBITED                       **
+**                          YOUR SESSION IS RECORDED                          **
+**                                                                            **
+********************************************************************************
+#
+
+None
+matche pas:
+b
+None
+matche pas:
+anner login #
+
+================================================================================
+*                        UNAUTHORISED ACCESS PROHIBITED                        *
+* This system is for the use of authorised users only. Individuals using this  *
+* computer system without authority, or in excess of their authority, are      *
+* subject to having all of their activities on this system monitored and       *
+* recorded by system personnel.                                                *
+*                                                                              *
+* In the course of monitoring individuals improperly using this system, or in  *
+* the course of system maintenance, the activities of authorised users may     *
+* also be monitored.                                                           *
+*                                                                              *
+* Anyone using this system expressly consents to such monitoring and is        *
+* advised that if such monitoring reveals possible evidence of criminal        *
+* activity, system personnel may provide evidence of such monitoring to        *
+* security officials.                                                          *
+*                                                                              *
+* The above notice also applies when using this system, or parts of it, to     *
+* gain access to other systems.                                                *
+================================================================================
+#
+
+None
+matche pas:
+l
+None
+matche pas:
+ogging console disable
+
+None
+matche pas:
+l
+None
+matche pas:
+ogging buffered 5120000
+
+None
+matche pas:
+l
+None
+matche pas:
+ogging buffered debugging
+
+None
+matche pas:
+l
+None
+matche pas:
+ogging facility local7
+
+None
+matche pas:
+l
+None
+matche pas:
+ogging 10.91.32.5 vrf MGMT severity info port default
+
+None
+matche pas:
+l
+None
+matche pas:
+ogging 10.91.108.31 vrf MGMT severity debugging port default
+
+None
+matche pas:
+l
+None
+matche pas:
+ogging suppress rule CANB_FAN_MESSAGES
+ alarm PLATFORM CANB_SERVER MESSAGE_FAILED
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+l
+None
+matche pas:
+ogging suppress apply rule CANB_FAN_MESSAGES
+ all-of-router
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+l
+None
+matche pas:
+ogging source-interface MgmtEth0/RSP0/CPU0/0 vrf MGMT
+
+None
+matche pas:
+l
+None
+matche pas:
+ogging hostnameprefix GSBEDCC2-PE101101
+
+None
+matche pas:
+s
+None
+matche pas:
+ervice timestamps log datetime localtime msec show-timezone
+
+None
+matche pas:
+s
+None
+matche pas:
+ervice timestamps debug datetime localtime msec show-timezone
+
+None
+matche pas:
+d
+None
+matche pas:
+omain vrf MGMT name mux.isinfra.net
+
+None
+matche pas:
+d
+None
+matche pas:
+omain name mux.isinfra.net
+
+None
+matche pas:
+d
+None
+matche pas:
+omain lookup disable
+
+None
+matche pas:
+u
+None
+matche pas:
+sergroup priv15
+ taskgroup root-system
+ taskgroup cisco-support
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+t
+None
+matche pas:
+acacs source-interface MgmtEth0/RSP0/CPU0/0 vrf MGMT
+
+None
+matche pas:
+t
+None
+matche pas:
+acacs-server host 10.91.32.7 port 49
+ key 7 000B16120D550C0301
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+t
+None
+matche pas:
+acacs-server ipv4 dscp cs6
+
+None
+matche pas:
+t
+None
+matche pas:
+acacs-server timeout 2
+
+None
+matche pas:
+u
+None
+matche pas:
+sername netadmin
+ group root-system
+ secret 5 $1$FuIQ$KMoXM/7H62RsyWdtcGGUG1
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+a
+None
+matche pas:
+aa accounting exec default start-stop group AAA_SERVER_TACACS none
+
+None
+matche pas:
+a
+None
+matche pas:
+aa accounting commands default start-stop group AAA_SERVER_TACACS none
+! Optional
+! tacacs-source-interface
+
+None
+matche pas:
+a
+None
+matche pas:
+aa group server tacacs+ AAA_SERVER_TACACS
+ server 10.91.32.7
+ vrf MGMT
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+a
+None
+matche pas:
+aa authorization exec default group AAA_SERVER_TACACS local
+
+None
+matche pas:
+a
+None
+matche pas:
+aa authorization commands default group AAA_SERVER_TACACS none
+
+None
+matche pas:
+a
+None
+matche pas:
+aa authentication login default group AAA_SERVER_TACACS local
+
+None
+matche pas:
+c
+None
+matche pas:
+dp
+
+None
+matche pas:
+v
+None
+matche pas:
+rf MGMT
+ address-family ipv4 unicast
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+v
+None
+matche pas:
+rf VPN0091
+ description L3VPN GDFSUEZ ADMIN BB
+ address-family ipv4 unicast
+  import route-policy RPL_VPN0091_IMPORTMAP
+  import route-target
+   48702:91000
+   48702:91900
+   48702:91904
+   48702:91905
+   48702:101030
+   48702:101031
+   48702:101032
+   48702:101035
+  !
+  export route-policy RPL_VPN0091_EXPORTMAP
+  export route-target
+   48702:91000
+  !
+  maximum prefix 20000 75
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+v
+None
+matche pas:
+rf VPN0097
+ description GDFSUEZ-COLT Management VPN
+ address-family ipv4 unicast
+  import route-target
+   48702:97000
+  !
+  export route-target
+   48702:97000
+  !
+  maximum prefix 1000 75
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+v
+None
+matche pas:
+rf VPN0101
+ description L3VPN GDFSUEZ-GROUP_SHARED
+ address-family ipv4 unicast
+  import route-target
+   48702:91030
+   48702:91031
+   48702:91032
+   48702:91033
+   48702:91034
+   48702:91040
+   48702:101000
+   48702:101031
+   48702:101090
+   48702:101300
+   48702:101500
+  !
+  export route-policy RPL_VPN0101_EXPORTMAP
+  export route-target
+   48702:101000
+  !
+  maximum prefix 20000 75
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+v
+None
+matche pas:
+rf VPN0102
+ description L3VPN EBL-ELECTRABEL_EXTERNAL
+ address-family ipv4 unicast
+  import route-target
+   48702:91030
+   48702:91031
+   48702:91032
+   48702:91033
+   48702:91034
+   48702:91040
+   48702:101020
+   48702:101022
+   48702:101024
+   48702:101027
+   48702:101030
+   48702:101031
+   48702:101032
+   48702:102000
+  !
+  export route-policy RPL_VPN0102_EXPORTMAP
+  export route-target
+   48702:102000
+  !
+  maximum prefix 5000 75
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+v
+None
+matche pas:
+rf VPN0104
+ description L3VPN GDFSUEZ-CENTRE
+ address-family ipv4 unicast
+  import route-target
+   48702:91030
+   48702:91031
+   48702:91032
+   48702:91033
+   48702:91034
+   48702:91040
+   48702:91904
+   48702:100011
+   48702:100015
+   48702:100021
+   48702:100024
+   48702:101022
+   48702:101024
+   48702:101027
+   48702:101030
+   48702:101031
+   48702:101032
+   48702:104000
+  !
+  export route-policy RPL_VPN0104_EXPORTMAP
+  export route-target
+   48702:104000
+  !
+  maximum prefix 5000 75
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+v
+None
+matche pas:
+rf VPN0105
+ description L3VPN SIZ L3VPN GSES-COFELY_EXTERNAL
+ address-family ipv4 unicast
+  import route-policy RPL_VPN0105_IMPORTMAP
+  import route-target
+   48702:91031
+   48702:101021
+   48702:101022
+   48702:101025
+   48702:101027
+   48702:101030
+   48702:101031
+   48702:101032
+   48702:105000
+  !
+  export route-policy RPL_VPN0105_EXPORTMAP
+  export route-target
+   48702:105000
+  !
+  maximum prefix 5000 75
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+v
+None
+matche pas:
+rf VPN0106
+ description L3VPN DGT-DEGREMONT EXTERNAL
+ address-family ipv4 unicast
+  import route-policy RPL_VPN0106_IMPORTMAP
+  import route-target
+   48702:106000
+  !
+  export route-target
+   48702:106000
+  !
+  maximum prefix 10000 75
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+v
+None
+matche pas:
+rf VPN0107
+ description L3VPN GTI-COFELY_NL_EXTERNAL
+ address-family ipv4 unicast
+  import route-target
+   48702:101027
+   48702:101031
+   48702:101032
+   48702:107000
+  !
+  export route-policy RPL_VPN0107_EXPORTMAP
+  export route-target
+   48702:107000
+  !
+  maximum prefix 10000 75
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+v
+None
+matche pas:
+rf VPN0108
+ description L3VPN BESB_EXTERNAL
+ address-family ipv4 unicast
+  import route-target
+   48702:108000
+  !
+  export route-target
+   48702:108000
+  !
+  maximum prefix 10000 75
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+v
+None
+matche pas:
+rf VPN0113
+ description L3VPN ORES-ORES_EXTERNAL
+ address-family ipv4 unicast
+  import route-target
+   48702:91030
+   48702:91031
+   48702:91032
+   48702:91033
+   48702:91034
+   48702:101027
+   48702:101030
+   48702:101031
+   48702:101032
+   48702:113000
+  !
+  export route-policy RPL_VPN0113_EXPORTMAP
+  export route-target
+   48702:113000
+  !
+  maximum prefix 5000 75
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+v
+None
+matche pas:
+rf VPN0116
+ description L3VPN TBL_EXTERNAL
+ address-family ipv4 unicast
+  import route-target
+   48702:116000
+  !
+  export route-target
+   48702:116000
+  !
+  maximum prefix 5000 75
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+v
+None
+matche pas:
+rf VPN0130
+ description GDFSUEZ-WIRED-GUEST
+ address-family ipv4 unicast
+  import route-target
+   48702:130000
+  !
+  export route-target
+   48702:130000
+  !
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+v
+None
+matche pas:
+rf VPN0135
+ description L3VPN NALLO_BEF
+ address-family ipv4 unicast
+  import route-target
+   48702:135000
+  !
+  export route-target
+   48702:135000
+  !
+  maximum prefix 5000 75
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+v
+None
+matche pas:
+rf VPN0148
+ description L3VPN GDFSUEZ GUEST_AUTH
+ address-family ipv4 unicast
+  import route-policy RPL_VPN0148_IMPORTMAP
+  import route-target
+   48702:148000
+  !
+  export route-target
+   48702:148000
+  !
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+v
+None
+matche pas:
+rf VPN0151
+ description L3VPN GDFSUEZ-NL GENCO SCADA
+ address-family ipv4 unicast
+  import route-target
+   48702:151000
+  !
+  export route-target
+   48702:151000
+  !
+  maximum prefix 1500 70
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+v
+None
+matche pas:
+rf VPN0152
+ description L3VPN EBL - TECVRF Internal
+ address-family ipv4 unicast
+  import route-target
+   48702:152000
+  !
+  export route-target
+   48702:152000
+  !
+  maximum prefix 5000 75
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+v
+None
+matche pas:
+rf VPN0153
+ description L3VPN EBL - TECVRF External
+ address-family ipv4 unicast
+  import route-target
+   48702:153000
+  !
+  export route-target
+   48702:153000
+  !
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+v
+None
+matche pas:
+rf VPN0199
+ description L3VPN GDFSUEZ ADMIN BB
+ address-family ipv4 unicast
+  import route-target
+   48702:199000
+  !
+  export route-target
+   48702:199000
+  !
+  maximum prefix 2000 75
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+v
+None
+matche pas:
+rf VPN0206
+ description L3VPN GDF-SUEZ_ON#*6 (RAS)
+ address-family ipv4 unicast
+  import route-target
+   48702:206000
+  !
+  export route-target
+   48702:206000
+  !
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+v
+None
+matche pas:
+rf VPN0207
+ description L3VPN GDF-SUEZ_ON#*7 (WIFI)
+ address-family ipv4 unicast
+  import route-target
+   48702:207000
+  !
+  export route-target
+   48702:207000
+  !
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+v
+None
+matche pas:
+rf VPN0208
+ description L3VPN GDF-SUEZ_ON#*8 (No.1x)
+ address-family ipv4 unicast
+  import route-target
+   48702:208000
+  !
+  export route-target
+   48702:208000
+  !
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+v
+None
+matche pas:
+rf VPN0209
+ description L3VPN GDF-SUEZ_ON#*9 (DOT1X)
+ address-family ipv4 unicast
+  import route-target
+   48702:209000
+  !
+  export route-target
+   48702:209000
+  !
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+v
+None
+matche pas:
+rf VPN0211
+ description L3VPN GDF-SUEZ_ON#BT (SIGN)
+ address-family ipv4 unicast
+  import route-target
+   48702:211000
+  !
+  export route-target
+   48702:211000
+  !
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+v
+None
+matche pas:
+rf VPN1000
+ description L3VPN SIZ (SERVICE INTER ZONE)
+ address-family ipv4 unicast
+  import route-target
+   48702:1000000
+  !
+  export route-target
+   48702:1000000
+  !
+  maximum prefix 10000 75
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+v
+None
+matche pas:
+rf VPN1001
+ description L3VPN GDFSUEZ-DATA_CENTER_BACKBONE
+ address-family ipv4 unicast
+  import route-policy RPL_VPN1001_IMPORTMAP
+  import route-target
+   48702:91031
+   48702:91033
+   48702:91034
+   48702:100011
+   48702:100020
+   48702:100021
+   48702:100024
+   48702:100100
+   48702:101020
+   48702:101022
+   48702:101023
+   48702:101024
+   48702:101025
+   48702:101027
+   48702:101030
+   48702:101031
+   48702:101032
+   48702:101034
+   48702:1001000
+  !
+  export route-policy RPL_VPN1001_EXPORTMAP
+  export route-target
+   48702:100100
+   48702:1001000
+  !
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+v
+None
+matche pas:
+rf VPN1101
+ description L3VPN GDFSUEZ-GROUP_SHARED_INTERNAL
+ address-family ipv4 unicast
+  import route-target
+   48702:1101000
+  !
+  export route-target
+   48702:1101000
+  !
+  maximum prefix 20000 75
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+v
+None
+matche pas:
+rf VPN1114
+ description L3VPN GDFSUEZ-ISZ_SERVICE_INTERNAL
+ address-family ipv4 unicast
+  import route-target
+   48702:1114000
+  !
+  export route-target
+   48702:1114000
+  !
+  maximum prefix 5000 75
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+v
+None
+matche pas:
+rf temp_test
+ description L3VPN temp_test_jlinsen
+ address-family ipv4 unicast
+  import route-target
+   64679:3101
+  !
+  export route-target
+   64679:3101
+  !
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+t
+None
+matche pas:
+cp path-mtu-discovery
+
+None
+matche pas:
+l
+None
+matche pas:
+ine template TEMPLATE_VTY_DEFAULT
+ login authentication default
+ exec-timeout 15 0
+ access-class ingress ACL4_GRT_VTY_DEFAULT
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+l
+None
+matche pas:
+ine template TEMPLATE_VTY_LAST_RESORT
+ secret 5 $1$0YTn$3ZYd0zTp/FEW2yWtStLNE/
+ login authentication default
+ exec-timeout 15 0
+ access-class ingress ACL4_GRT_VTY_LAST_RESORT
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+v
+None
+matche pas:
+ty-pool default 0 14 line-template TEMPLATE_VTY_DEFAULT
+
+None
+matche pas:
+v
+None
+matche pas:
+ty-pool VTY_LAST_RESORT 15 15 line-template TEMPLATE_VTY_LAST_RESORT
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server ifindex persist
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server vrf MGMT
+ host 10.91.32.12 traps public
+ host 10.91.32.13 traps public
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server ipv4 dscp cs6
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server view SNMP_VIEW_MGMT cisco included
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server view SNMP_VIEW_MGMT mib-2 included
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server view SNMP_VIEW_MGMT internet included
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server community giu3po view SNMP_VIEW_MGMT RO SystemOwner IPv4 ACL4_GRT_SNMP_MGMT_RO
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server community vvce2d view SNMP_VIEW_MGMT RW IPv4 ACL4_GRT_SNMP_MGMT_RW
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server community DTC0M3XPT view SNMP_VIEW_MGMT RO IPv4 ACL4_SNMP_DATACOM_EXPERTISE_RO
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps rf
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps bfd
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps ethernet cfm
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps ds1
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps ds3
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps ntp
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps ethernet oam events
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps otn
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps copy-complete
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps snmp linkup
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps snmp linkdown
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps snmp coldstart
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps snmp warmstart
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps snmp authentication
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps flash removal
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps flash insertion
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps sonet
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps config
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps entity
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps selective-vrf-download role-change
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps system
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps ospf lsa lsa-maxage
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps ospf lsa lsa-originate
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps ospf errors bad-packet
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps ospf errors authentication-failure
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps ospf errors config-error
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps ospf errors virt-bad-packet
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps ospf errors virt-authentication-failure
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps ospf errors virt-config-error
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps ospf retransmit packets
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps ospf retransmit virt-packets
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps ospf state-change if-state-change
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps ospf state-change neighbor-state-change
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps ospf state-change virtif-state-change
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps ospf state-change virtneighbor-state-change
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps frequency synchronization
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps bridgemib
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps addrpool low
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps addrpool high
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps entity-state operstatus
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps entity-state switchover
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps entity-redundancy all
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps entity-redundancy status
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps entity-redundancy switchover
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server contact IT NETRUN
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server packetsize 8192
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server trap-source MgmtEth0/RSP0/CPU0/0
+
+None
+matche pas:
+i
+None
+matche pas:
+cmp ipv4 rate-limit unreachable DF 100
+
+None
+matche pas:
+i
+None
+matche pas:
+cmp ipv4 rate-limit unreachable 100
+
+None
+matche pas:
+f
+None
+matche pas:
+tp client source-interface MgmtEth0/RSP0/CPU0/0
+
+None
+matche pas:
+n
+None
+matche pas:
+tp
+ server vrf MGMT 10.91.2.51
+ server vrf MGMT 10.91.2.52
+ access-group vrf MGMT ipv4 peer ACL4_GRT_NTP_PEERS
+ access-group vrf MGMT ipv4 serve ACL4_GRT_NTP_CLIENTS
+ source vrf MGMT MgmtEth0/RSP0/CPU0/0
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+t
+None
+matche pas:
+ftp client vrf MGMT source-interface MgmtEth0/RSP0/CPU0/0
+
+None
+matche pas:
+c
+None
+matche pas:
+ontrol-plane
+ management-plane
+  out-of-band
+   vrf MGMT
+   interface MgmtEth0/RSP0/CPU0/0
+    allow SSH
+    allow SNMP
+   !
+  !
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+pv4 access-list ACLv4_BFD_TEST
+ 10 permit udp any any eq 3785
+ 20 permit ipv4 any any
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+pv4 access-list ACL_BACKUPS_SBZ
+ 10 permit ipv4 10.91.68.0 0.0.3.255 any
+ 20 permit ipv4 any 10.91.68.0 0.0.3.255
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+pv4 access-list ACLv4_BFD_TEST_v2
+ 10 deny udp any any eq 3785
+ 20 permit ipv4 any any
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+pv4 access-list ACL4_GRT_NTP_PEERS
+ 10 remark NTP peers
+ 20 permit ipv4 host 10.91.2.51 any
+ 30 permit ipv4 host 10.91.2.52 any
+ 40 deny ipv4 any any log
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+pv4 access-list ACL4_GRT_MPLS_PEERS
+ 10 permit ipv4 172.21.0.0 0.0.3.255 any
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+pv4 access-list ACL4_GRT_NTP_CLIENTS
+ 10 remark NTP clients
+ 20 deny ipv4 any any log
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+pv4 access-list ACL4_GRT_VTY_DEFAULT
+ 10 remark VTY access
+ 20 permit tcp any any
+ 30 deny tcp any any range 0 65535 log
+ 40 deny ipv4 any any log
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+pv4 access-list ACL4_GRT_SNMP_MGMT_RO
+ 10 remark SNMP management read-only access
+ 20 permit ipv4 10.91.32.0 0.0.0.31 any
+ 30 permit ipv4 10.91.32.64 0.0.0.63 any
+ 40 permit ipv4 10.146.244.0 0.0.0.63 any
+ 42 permit ipv4 host 10.91.108.30 any
+ 50 deny ipv4 any any log
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+pv4 access-list ACL4_GRT_SNMP_MGMT_RW
+ 10 remark SNMP management read-write access
+ 20 permit ipv4 10.91.32.0 0.0.0.31 any
+ 30 permit ipv4 10.91.32.64 0.0.0.63 any
+ 40 permit ipv4 10.146.244.0 0.0.0.63 any
+ 50 deny ipv4 any any log
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+pv4 access-list ACL4_GRT_VTY_LAST_RESORT
+ 10 remark VTY access last resort
+ 20 permit tcp host 10.91.32.13 any
+ 30 permit tcp host 10.146.244.13 any
+ 40 deny tcp any any range 0 65535 log
+ 50 deny ipv4 any any log
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+pv4 access-list ACL4_SNMP_DATACOM_EXPERTISE_RO
+ 10 remark SNMP management read-only access Datacom Expertise
+ 20 permit ipv4 host 10.91.108.31 any
+ 30 permit ipv4 host 10.91.108.30 any
+ 40 deny ipv4 any any log
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+c
+None
+matche pas:
+lass-map match-all CLM_BACKUPS_SBZ
+ match access-group ipv4 ACL_BACKUPS_SBZ 
+ end-class-map
+! 
+
+None
+matche pas:
+p
+None
+matche pas:
+olicy-map PLM_VPN0091_ADMIN-FW_IN
+ class CLM_BACKUPS_SBZ
+  police rate 900000000 bps burst 2000000 bytes 
+   conform-action transmit
+   exceed-action drop
+  ! 
+ ! 
+ class class-default
+ ! 
+ end-policy-map
+! 
+
+None
+matche pas:
+p
+None
+matche pas:
+olicy-map PLM_VPN0091_ADMIN-FW_OUT
+ class CLM_BACKUPS_SBZ
+  police rate 900000000 bps burst 2000000 bytes 
+   conform-action transmit
+   exceed-action drop
+  ! 
+ ! 
+ class class-default
+ ! 
+ end-policy-map
+! 
+
+None
+matche pas:
+n
+None
+matche pas:
+v
+ satellite 101
+  type asr9000v2
+  secret 5 $1$51Uy$wULcmIERll5z4UjmXi1Ka1
+  description PE101101-SAT101
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether10
+ description GSBEDCC2-SW074-Gi1/0/21
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether10.89 l2transport
+ description Proximus Explore - Bpost
+ encapsulation dot1q 89
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether10.1131 l2transport
+ description Proximus Explore - Atrias
+ encapsulation dot1q 1131
+ rewrite ingress tag pop 1 symmetric
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether11
+ description to DCC2/3 SR001/2 vPC 11 - BundleEth to DCC SR003 Po21/22
+ dampening
+ logging events link-status
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether11.84
+ description VPN0102 - interco Dual-RAS
+ vrf VPN0102
+ ipv4 address 171.26.244.73 255.255.255.240
+ encapsulation dot1q 84
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether11.90
+ description VRF VPN0091 - interco GSBEDCC2/3-SR003 PE101101/2
+ vrf VPN0091
+ ipv4 address 10.52.240.57 255.255.255.248
+ dampening
+ encapsulation dot1q 90
+ logging events link-status
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether11.151
+ description VRF VPN0151 - interco GSBEDCC2/3-SR003 PE101101/2
+ vrf VPN0151
+ ipv4 address 10.50.192.1 255.255.255.248
+ dampening
+ encapsulation dot1q 151
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether11.202
+ description VRF VPN0101 - interco GSBEDCC2/3-SR003 PE101101/2
+ vrf VPN0101
+ ipv4 address 10.50.1.33 255.255.255.248
+ dampening
+ encapsulation dot1q 202
+ logging events link-status
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether11.207
+ description VRF VPN0107 - interco GSBEDCC2/3-SR003 PE101101/2
+ vrf VPN0107
+ ipv4 address 10.50.25.33 255.255.255.248
+ dampening
+ encapsulation dot1q 207
+ logging events link-status
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether11.317
+ description VPN1001 - interco AIM_VSELECTRABEL
+ vrf VPN1001
+ ipv4 address 10.52.208.60 255.255.255.248
+ encapsulation dot1q 317
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether11.318
+ description VRF DCBB - interco GSBEDCC2/3-SR003 PE101101/2
+ vrf VPN1001
+ ipv4 address 10.52.211.249 255.255.255.248
+ dampening
+ encapsulation dot1q 318
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether11.319
+ description VRF temp_test - interco GSBEDCC2/3-SR003 PE101101/2
+ vrf temp_test
+ ipv4 address 10.52.211.241 255.255.255.248
+ load-interval 30
+ dampening
+ encapsulation dot1q 319
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether11.403
+ description VRF VPN0113 - interco GSBEDCC2/3-SR003 PE101101/2
+ vrf VPN0113
+ ipv4 address 10.50.49.33 255.255.255.248
+ dampening
+ encapsulation dot1q 403
+ logging events link-status
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether11.445
+ description VRF VPN0108 - interco GSBEDCC2/3-SR003 PE101101/2
+ vrf VPN0108
+ ipv4 address 10.50.29.33 255.255.255.248
+ dampening
+ encapsulation dot1q 445
+ logging events link-status
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether11.502
+ description VPN0102 - interco AIM_VSELECTRABEL
+ vrf VPN0102
+ ipv4 address 10.50.5.114 255.255.255.248
+ encapsulation dot1q 502
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether11.504
+ description VPN0104 - interco AIM_VSCENTRE
+ vrf VPN0104
+ ipv4 address 10.50.13.114 255.255.255.248
+ encapsulation dot1q 504
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether11.513
+ description VPN0113 - interco AIM_VSHOST-ORES
+ vrf VPN0113
+ ipv4 address 10.50.49.114 255.255.255.248
+ encapsulation dot1q 513
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether11.516
+ description VPN0116 - interco AIM_TBL
+ vrf VPN0116
+ ipv4 address 10.50.61.114 255.255.255.248
+ encapsulation dot1q 516
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether11.528
+ description VRF VPN0105 - interco GSBEDCC2/3-SR003 PE101101/2
+ vrf VPN0105
+ ipv4 address 10.50.17.33 255.255.255.248
+ dampening
+ encapsulation dot1q 528
+ logging events link-status
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether11.530
+ description VPN0130 - interco AIM_WIRED_GUEST
+ vrf VPN0130
+ ipv4 address 10.90.119.130 255.255.255.248
+ encapsulation dot1q 530
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether11.540
+ description VRF VPN0116 - interco GSBEDCC2/3-SR003 PE101101/2
+ vrf VPN0116
+ ipv4 address 10.50.61.33 255.255.255.248
+ dampening
+ encapsulation dot1q 540
+ logging events link-status
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether11.548
+ description VPN0148 - interco AIM-GUEST_AUTH
+ vrf VPN0148
+ ipv4 address 10.50.189.117 255.255.255.248
+ encapsulation dot1q 548
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether11.553
+ description VPN0153 - interco AIM_VSHOSTGROUP
+ vrf VPN0153
+ ipv4 address 10.50.200.18 255.255.255.248
+ encapsulation dot1q 553
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether11.595
+ description VPN1001 - interco AIM_ON
+ vrf VPN1001
+ ipv4 address 10.51.133.69 255.255.255.248
+ encapsulation dot1q 595
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether11.600
+ description VRF VPN0102 - interco GSBEDCC2/3-SR003 PE101101/2
+ vrf VPN0102
+ ipv4 address 10.50.50.249 255.255.255.248
+ dampening
+ encapsulation dot1q 600
+ logging events link-status
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether11.752
+ description VRF VPN0152 - interco GSBEDCC2/3-SR003 PE101101/2
+ vrf VPN0152
+ ipv4 address 10.50.198.9 255.255.255.248
+ encapsulation dot1q 752
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether11.1012
+ description VPN0101 - interco AIM_VSSERVGROUP
+ vrf VPN0101
+ ipv4 address 10.50.1.114 255.255.255.248
+ encapsulation dot1q 1012
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether11.1013
+ description VPN0101 - interco AIM_VSHOSTGROUP
+ vrf VPN0101
+ ipv4 address 10.50.1.98 255.255.255.248
+ encapsulation dot1q 1013
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether11.1101
+ description VRF VPN1101 - interco GSBEDCC2/3-SR003 PE101101/2
+ vrf VPN1101
+ ipv4 address 10.64.155.105 255.255.255.248
+ dampening
+ encapsulation dot1q 1101
+ logging events link-status
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether11.1114
+ description VRF VPN1114 - interco GSBEDCC2/3-SR003 PE101101/2
+ vrf VPN1114
+ ipv4 address 10.91.7.113 255.255.255.248
+ dampening
+ encapsulation dot1q 1114
+ logging events link-status
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether11.1199
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether11.1910
+ description VRF VPN0091 - interco ADMIN_FW
+ service-policy input PLM_VPN0091_ADMIN-FW_IN
+ service-policy output PLM_VPN0091_ADMIN-FW_OUT
+ vrf VPN0091
+ ipv4 address 10.91.97.50 255.255.255.248
+ encapsulation dot1q 1910
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether11.1933
+ description VRF VPN1001 - interco DCC_IAF
+ vrf VPN1001
+ ipv4 address 10.51.133.42 255.255.255.248
+ encapsulation dot1q 1933
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether11.1943
+ description VRF VPN0206 - interco DCC_IAF
+ vrf VPN0206
+ ipv4 address 10.51.21.74 255.255.255.248
+ encapsulation dot1q 1943
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether11.1944
+ description VRF VPN0207 - interco DCC_IAF
+ vrf VPN0207
+ ipv4 address 10.51.25.66 255.255.255.248
+ encapsulation dot1q 1944
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether11.1945
+ description VRF VPN0208 - interco DCC_IAF
+ vrf VPN0208
+ ipv4 address 10.51.29.66 255.255.255.248
+ encapsulation dot1q 1945
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether11.1946
+ description VRF VPN0209 - interco DCC_IAF
+ vrf VPN0209
+ ipv4 address 10.51.33.66 255.255.255.248
+ encapsulation dot1q 1946
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether11.1955
+ description VRF VPN0211 - interco DCC_IAF
+ vrf VPN0211
+ ipv4 address 10.51.41.66 255.255.255.248
+ encapsulation dot1q 1955
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether11.1956
+ description VPN0206 - interco AIM_VSON_RAS
+ vrf VPN0206
+ ipv4 address 10.51.21.50 255.255.255.248
+ encapsulation dot1q 1956
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether11.1970
+ description VRF VPN0097 - interco ADMIN_FW
+ vrf VPN0097
+ ipv4 address 172.24.37.26 255.255.255.248
+ encapsulation dot1q 1970
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether11.1999
+ description VRF VPN0199 - interco GSBEDCC2/3-SR003 PE101101/2
+ vrf VPN0199
+ ipv4 address 10.50.42.65 255.255.255.248
+ dampening
+ encapsulation dot1q 1999
+ logging events link-status
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether11.3100
+ description VRF VPN1000 - interco GSBEDCC2/3-SR003 PE101101/2
+ vrf VPN1000
+ ipv4 address 10.51.128.9 255.255.255.248
+ dampening
+ encapsulation dot1q 3100
+ logging events link-status
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Bundle-Ether101
+ nv
+  satellite-fabric-link satellite 101
+   remote-ports GigabitEthernet 0/0/0-43
+  !
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface Loopback48702
+ ipv4 address 172.21.0.105 255.255.255.255
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface MgmtEth0/RSP0/CPU0/0
+ cdp
+ vrf MGMT
+ ipv4 address 10.91.108.36 255.255.255.192
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface MgmtEth0/RSP0/CPU0/1
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet0/0/0/0
+ description gsbedcc2-fw941_eth1 ### Succursales
+ mtu 1528
+ speed 1000
+ l2transport
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet0/0/0/1
+ description INSO_TEMP_PW_to_DCW_reserved_ggk029
+ mtu 1518
+ speed 1000
+ l2transport
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet0/0/0/2
+ description interco GSBEDCC2-SW074#Gi1/1/4
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet0/0/0/2.26
+ description VPN0135 - FW N-ALLO
+ vrf VPN0135
+ ipv4 address 10.69.254.101 255.255.255.248
+ load-interval 30
+ encapsulation dot1q 26
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet0/0/0/2.110
+ description VPN0102 - FW N-ALLO
+ vrf VPN0102
+ ipv4 address 192.168.39.18 255.255.255.240
+ load-interval 30
+ encapsulation dot1q 110
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet0/0/0/3
+ shutdown
+ l2transport
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet0/0/0/4
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet0/0/0/5
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet0/0/0/6
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet0/0/0/7
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet0/0/0/8
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet0/0/0/9
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet0/0/0/10
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet0/0/0/11
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet0/0/0/12
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet0/0/0/13
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet0/0/0/14
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet0/0/0/15
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet0/0/0/16
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet0/0/0/17
+ description RSRV_SL001_FBA_05-08-16
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet0/0/0/18
+ description RSRV_WOC_FBA495_28-06-16
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet0/0/0/19
+ description RSRV_WOC_FBA495_28-06-16
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/0
+ description GSBEDCC2-SW074-Gi1/0/20
+ bundle id 10 mode active
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/1
+ description GSBEDCC2-SW074-Gi1/0/21
+ bundle id 10 mode active
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/2
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/3
+ description GSBEDCC3-RR002_Gi0/3
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/4
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/5
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/6
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/7
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/8
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/9
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/10
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/11
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/12
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/13
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/14
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/15
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/16
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/17
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/18
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/19
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/20
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/21
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/22
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/23
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/24
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/25
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/26
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/27
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/28
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/29
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/30
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/31
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/32
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/33
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/34
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/35
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/36
+ description WOC reserved
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/37
+ description WOC reserved
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/38
+ description WOC reserved
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/39
+ description WOC reserved
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/40
+ description GSBEDCC2-LAB-GS901_N4
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/41
+ description GSBEDCC2-LAB-GS900_N5_eth1/3
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/42
+ description GSBEDCC2-BONNIE_eth1
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface GigabitEthernet101/0/0/43
+ description GSBEDCC2-LAB-PE101191_TenG0/1
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface TenGigE0/0/1/0
+ description GSBEDCC-PE101102#TE0/0/1/0
+ mtu 9122
+ ipv4 address 172.21.22.37 255.255.255.252
+ carrier-delay up 5000 down 0
+ dampening
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface TenGigE0/0/1/1
+ description GSBEBR1-PE101301#TE0/0/1/1
+ mtu 9122
+ ipv4 address 172.21.22.30 255.255.255.252
+ carrier-delay up 5000 down 0
+ dampening
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface TenGigE0/0/1/2
+ shutdown
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface TenGigE0/0/1/3
+ description GSBEDCC2-SR001(eth1/4) - Bundle-Ether11
+ bundle id 11 mode active
+ cdp
+ load-interval 30
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface TenGigE0/0/2/0
+ description GSBEDCC-PE101102#TE0/0/2/0
+ mtu 9122
+ ipv4 address 172.21.23.37 255.255.255.252
+ carrier-delay up 5000 down 0
+ dampening
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface TenGigE0/0/2/1
+ description PE101101-SAT101-SFP1
+ bundle id 101 mode on
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface TenGigE0/0/2/2
+ description PE101101-SAT101-SFP2
+ bundle id 101 mode on
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+i
+None
+matche pas:
+nterface TenGigE0/0/2/3
+ description GSBEDCC3-SR002(eth1/4) - Bundle-Ether11
+ bundle id 11 mode active
+ cdp
+ shutdown
+ load-interval 30
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+e
+None
+matche pas:
+xtcommunity-set rt EXTCOMS_RT_ECL_VPN0103
+  48702:103000
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+e
+None
+matche pas:
+xtcommunity-set rt EXTCOMS_RT_IMPORT_FROM_GROUP
+  48702:101031
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+e
+None
+matche pas:
+xtcommunity-set rt EXTCOMS_RT_IMPORT_INTO_DCB-DCC_GROUP
+  48702:101300
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+p
+None
+matche pas:
+olicy-global
+  DEFAULT_INGRESS_MED '10',
+  LPREF_PRIM_PE '3333',
+  LPREF_SECO_PE '2222',
+  LPREF_THIR_PE '1111',
+  LPREF_QUAD_PE '1110',
+  MED_PRIM_PE '100',
+  MED_SECO_PE '200',
+  MED_THIR_PE '300',
+  MED_QUAD_PE '400',
+  MY_AS '48702',
+  RT_IMPORT_SHARED_ADMIN '91900',
+  RT_IMPORT_SHARED_GROUP '101200',
+  RT_IMPORT_GROUP_DCB '101300',
+  RT_IMPORT_SHARED_GROUP_S4 '101200',
+  RT_IMPORT_SHARED_GROUP_DCB '101300'
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-global
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+p
+None
+matche pas:
+refix-set jlinsen
+  0.0.0.0/0 ge 16 le 20
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+p
+None
+matche pas:
+refix-set PFX_DEFAULT
+  0.0.0.0/0
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+p
+None
+matche pas:
+refix-set PFX_VPN0102_ORES
+  10.66.0.0/21 le 32
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+p
+None
+matche pas:
+refix-set PFX_VPN0101_FTP_HUB
+  194.29.98.128/27
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+p
+None
+matche pas:
+refix-set PFX-VPN0102_SATELLITE
+  10.63.28.48/29,
+  10.63.28.56/29,
+  10.63.28.96/29,
+  10.63.28.104/29,
+  10.63.152.160/29,
+  10.64.137.96/28,
+  10.64.137.112/28,
+  10.64.137.128/28,
+  192.168.138.0/29,
+  192.168.138.96/29,
+  192.168.138.128/28
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+p
+None
+matche pas:
+refix-set PFX_NOLEAK_TO_VPN0091
+  10.149.248.0/21 le 32
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+p
+None
+matche pas:
+refix-set PFX_VPN0102_DENY_EXPORT
+  10.64.132.0/24 le 32,
+  10.64.133.32/27 le 32,
+  10.64.133.64/26 le 32,
+  10.64.133.128/25 le 32,
+  10.64.144.0/20 le 32,
+  10.90.26.0/27 le 32,
+  10.90.28.0/27 le 32,
+  10.90.30.0/24 le 32,
+  10.91.60.80/28 le 32,
+  10.91.64.0/22 le 32,
+  10.90.14.0/23 le 32,
+  10.90.16.0/23 le 32,
+  10.90.22.0/23 le 32,
+  10.90.40.0/24 le 32,
+  10.90.41.0/24 le 32,
+  10.90.78.0/23 le 32,
+  10.90.90.0/28 le 32,
+  10.90.145.24/29 le 32,
+  10.90.145.56/29 le 32,
+  10.90.147.0/24 le 32
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+p
+None
+matche pas:
+refix-set PFX_VPN0102_OTHER_SUBNETS
+  172.26.0.0/16 le 32
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+p
+None
+matche pas:
+refix-set PFX_VPN1001_INTERCO_RANGE
+  10.52.208.0/20,
+  10.51.133.64/29
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+p
+None
+matche pas:
+refix-set PFX_VPN0101_IDENT_AWARENESS
+  10.90.124.128/28
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+p
+None
+matche pas:
+refix-set PFX_VPN0101_OFFICIAL_SUBNETS
+  10.90.42.128/28,
+  10.50.0.0/22 le 32
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+p
+None
+matche pas:
+refix-set PFX_VPN0102_OFFICIAL_SUBNETS
+  171.26.0.0/16 le 32,
+  194.29.97.0/24 le 32,
+  194.29.98.0/24 le 32,
+  10.63.0.0/16 le 32,
+  10.64.0.0/16 le 32,
+  10.65.0.0/17 le 32,
+  10.30.0.0/16 le 32,
+  10.31.0.0/16 le 32,
+  10.43.0.0/16 le 32,
+  10.44.0.0/16 le 32,
+  10.66.0.0/16 le 32,
+  10.69.0.0/16 le 32,
+  10.70.0.0/16 le 32,
+  10.77.0.0/16 le 32,
+  10.250.0.0/16 le 32,
+  10.90.0.0/16 le 32,
+  10.90.18.0/23 le 32,
+  10.90.20.0/23 le 32,
+  10.90.96.0/22 le 32,
+  10.90.104.0/22 le 32,
+  10.90.120.0/22 le 32,
+  10.91.0.0/18 le 32,
+  10.50.4.0/22 le 32,
+  10.90.136.0/21 le 32,
+  10.20.16.0/21 le 32,
+  10.149.0.0/20 le 32,
+  10.149.248.0/21 le 32,
+  10.26.224.0/20 le 32,
+  10.26.192.0/23 le 32,
+  10.25.112.0/20 le 32,
+  10.90.44.0/23 le 32,
+  10.90.46.0/23 le 32,
+  10.90.124.0/22 le 32,
+  10.90.130.0/23 le 32,
+  10.67.192.0/18 le 32,
+  10.67.152.0/21 le 32
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+p
+None
+matche pas:
+refix-set PFX_VPN0105_OFFICIAL_SUBNETS
+  10.0.0.0/12 le 32,
+  10.24.32.0/21 le 32,
+  10.224.72.0/21 le 32,
+  10.62.0.0/16 le 32,
+  10.113.0.0/16 le 32,
+  10.119.0.0/16 le 32,
+  10.120.0.0/16 le 32,
+  10.222.0.0/16 le 32,
+  10.90.6.0/23 le 32,
+  10.50.16.0/22 le 32,
+  10.146.64.0/21 le 32,
+  10.216.184.0/21 le 32,
+  10.216.0.0/17 le 32,
+  10.217.160.0/19 le 32,
+  10.55.0.0/21 le 32,
+  10.26.96.0/21 le 32,
+  10.26.128.0/21 le 32,
+  10.216.192.0/18 le 32,
+  10.57.0.0/16 le 32,
+  10.47.8.0/21 le 32,
+  10.224.40.0/21 le 32,
+  10.224.56.0/21 le 32,
+  10.25.32.0/20 le 32,
+  10.141.0.0/16 le 32,
+  10.142.0.0/16 le 32,
+  10.143.0.0/16 le 32,
+  10.224.66.0/24 le 32,
+  10.26.16.0/21 le 32,
+  10.130.0.0/16 le 32,
+  10.71.0.0/16 le 32,
+  10.18.200.0/21 le 32,
+  10.18.208.0/21 le 32,
+  10.158.32.0/21 le 32,
+  10.158.0.0/19 le 32,
+  10.67.48.0/21 le 32,
+  10.67.8.0/21 le 32,
+  10.216.184.0/24 le 32,
+  10.75.16.0/21 le 32,
+  10.157.0.0/16 le 32,
+  10.90.4.0/23 le 32,
+  10.90.68.0/22 le 32,
+  10.25.240.16/28 le 32,
+  10.42.0.0/16 le 32,
+  10.224.64.0/20 le 32,
+  10.224.144.0/20 le 32,
+  10.224.160.0/20 le 32,
+  10.55.128.0/17 le 32,
+  10.224.176.0/21 le 32,
+  10.32.112.0/20 le 32,
+  10.217.128.0/19 le 32,
+  10.25.8.0/21 le 32,
+  10.25.72.0/21 le 32,
+  10.25.80.0/20 le 32,
+  10.45.0.0/16 le 32,
+  10.46.0.0/16 le 32,
+  10.47.48.0/20 le 32,
+  10.47.64.0/20 le 32,
+  10.47.192.0/18 le 32,
+  10.67.64.0/18 le 32,
+  10.90.22.0/23 le 32,
+  10.218.0.0/16 le 32,
+  10.254.0.0/18 le 32,
+  10.25.240.32/28 le 32,
+  10.32.128.0/17 le 32,
+  10.190.16.0/22 le 32,
+  10.27.0.0/16 le 32,
+  10.29.0.0/16 le 32,
+  10.33.0.0/16 le 32,
+  10.100.0.0/16 le 32,
+  10.61.0.0/16 le 32,
+  10.26.32.0/19 le 32,
+  10.26.64.0/19 le 32,
+  10.50.40.0/22 le 32,
+  10.115.0.0/16 le 32,
+  10.158.40.0/21 le 32,
+  10.75.64.0/18 le 32,
+  10.254.128.0/18 le 32,
+  10.22.56.0/21 le 32,
+  10.50.9.96/29 le 32,
+  10.50.60.0/22 le 32,
+  10.50.44.0/22 le 32,
+  10.214.128.0/17 le 32,
+  10.127.0.0/16 le 32,
+  10.26.112.0/21 le 32
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+p
+None
+matche pas:
+refix-set PFX_VPN0107_OFFICIAL_SUBNETS
+  10.90.2.0/23 le 32,
+  10.58.0.0/16 le 32,
+  10.59.0.0/16 le 32,
+  10.60.0.0/16 le 32,
+  10.50.24.0/22 le 32,
+  10.50.28.0/22 le 32
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+p
+None
+matche pas:
+refix-set PFX_VPN0113_OFFICIAL_SUBNETS
+  10.90.14.0/23 le 32,
+  10.90.16.0/23 le 32,
+  10.90.78.0/23 le 32,
+  10.66.0.0/22 le 32,
+  10.90.40.0/23 le 32,
+  10.90.104.96/28 le 32,
+  10.90.104.64/27 le 32,
+  10.50.48.0/22 le 32
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+p
+None
+matche pas:
+refix-set PFX_VPN1001_PARTNER_ECONOCOM
+  10.169.129.0/24
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+p
+None
+matche pas:
+refix-set PFX_VPN0102_NON-COMPLIANT_SUBNETS
+  192.168.0.0/16 le 32
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+p
+None
+matche pas:
+refix-set PFX_VPN0102_NON-COMPLIANT_SUBNETS-VSEBL
+  192.168.12.85/32,
+  192.168.13.0/24,
+  192.168.31.64/26,
+  192.168.54.24/32,
+  192.168.69.0/24,
+  192.168.107.0/24,
+  192.168.108.0/22,
+  192.168.201.0/24,
+  192.168.202.0/24,
+  192.168.203.0/24,
+  192.168.229.0/24,
+  192.168.231.0/24,
+  192.168.241.160/27,
+  192.168.245.0/24,
+  192.168.246.0/25,
+  192.168.246.128/26,
+  192.168.247.0/24,
+  192.168.249.48/28,
+  192.168.249.64/27,
+  192.168.249.112/28,
+  192.168.252.0/27,
+  192.168.252.48/28,
+  192.168.230.16/28,
+  172.16.19.0/24 le 32,
+  172.16.20.0/24 le 32,
+  172.17.0.0/22,
+  172.19.0.0/27 le 32,
+  172.20.0.0/16 le 32,
+  172.21.0.0/16 le 32,
+  172.22.0.0/16 le 32,
+  172.23.0.0/16 le 32,
+  172.24.0.0/16 le 32,
+  172.25.0.0/16 le 32,
+  172.26.0.0/16 le 32,
+  172.27.0.0/16 le 32,
+  172.29.16.0/21,
+  172.29.29.0/24,
+  10.25.1.253/32,
+  10.25.49.32/27 le 32,
+  10.25.50.0/24 le 32,
+  10.25.50.32/27 le 32,
+  10.124.102.0/24 le 32,
+  10.18.176.0/25 le 32,
+  10.150.0.0/16 le 32,
+  10.192.4.0/24 le 32,
+  10.193.0.0/24 le 32,
+  10.193.113.0/24 le 32,
+  10.18.177.0/25 le 32,
+  10.193.0.0/16 le 32,
+  10.26.136.128/25 le 32,
+  10.25.112.0/20 le 32,
+  82.201.63.48/29
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+p
+None
+matche pas:
+refix-set PFX_VPN0104_OFFICIAL_SUBNETS_DONT_TRUST
+  10.110.0.0/16 le 32
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+p
+None
+matche pas:
+refix-set PFX_VPN0091_EXPORT_SET_RT_48702_91034_ADD
+  10.52.240.60/30,
+  10.52.240.232/29,
+  10.52.240.240/28
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+p
+None
+matche pas:
+refix-set PFX_VPN0102_EXPORT_TO_VPN0101_NOT_VPN0091
+  # PFX was called PFX_VPN0131-IMPORT-INTO-VPN0091 on pe100303
+  10.65.0.0/17 le 32,
+  171.26.40.128/25 le 32,
+  10.66.38.0/25 le 32,
+  10.24.207.0/24 le 32,
+  10.50.120.0/22 le 32
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+p
+None
+matche pas:
+refix-set PFX_VPN0102_WWW_ACC_VIA_AIM_EBL_FOR_VPN0101
+  67.223.64.0/19,
+  68.171.224.0/19,
+  68.171.232.35/32,
+  68.171.232.36/32,
+  68.171.242.252/32,
+  69.191.247.60/32,
+  93.186.16.0/20,
+  160.43.251.60/32,
+  193.109.81.0/24,
+  193.109.81.33/32,
+  198.76.161.0/24,
+  204.187.87.0/24,
+  206.51.26.0/24,
+  206.53.144.0/20,
+  208.65.75.22/32,
+  208.65.77.22/32,
+  208.65.77.102/32,
+  216.9.240.0/20,
+  216.9.242.246/32,
+  216.9.242.247/32,
+  216.136.156.64/27
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+p
+None
+matche pas:
+refix-set PFX_VPN0101_SH_GIN_FOR_ECONOCOM_BEHIND_AIM_ON
+  10.146.16.0/21,
+  10.89.128.0/17,
+  10.248.0.0/16,
+  10.249.0.0/16
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+c
+None
+matche pas:
+ommunity-set COMS_DC_EMT
+  48702:701
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+c
+None
+matche pas:
+ommunity-set COMS_DC_ISZ
+  48702:712
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+c
+None
+matche pas:
+ommunity-set COMS_GDC_DC
+  48702:702
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+c
+None
+matche pas:
+ommunity-set COMS_LOC_BE
+  48702:10032
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+c
+None
+matche pas:
+ommunity-set COMS_LOC_FR
+  48702:10033
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+c
+None
+matche pas:
+ommunity-set COMS_DC_ORES
+  48702:711
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+c
+None
+matche pas:
+ommunity-set COMS_LOC_DCC
+  48702:1011
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+c
+None
+matche pas:
+ommunity-set COMS_LOC_DCL
+  48702:1003
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+c
+None
+matche pas:
+ommunity-set COMS_LOC_DCW
+  48702:1006
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+c
+None
+matche pas:
+ommunity-set COMS_DC_COFELY
+  48702:706
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+c
+None
+matche pas:
+ommunity-set COMS_DC_GRP_SIZ
+  48702:705
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+c
+None
+matche pas:
+ommunity-set COMS_DC_ADMIN_BB
+  48702:713
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+c
+None
+matche pas:
+ommunity-set COMS_DC_FABRICOM
+  48702:709
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+c
+None
+matche pas:
+ommunity-set COMS_DC_COFELY_NL
+  48702:708
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+c
+None
+matche pas:
+ommunity-set COMS_DC_TRACTEBEL
+  48702:710
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+c
+None
+matche pas:
+ommunity-set COMS_INJECT_POINT
+  # set location
+  48702:1011,
+  # set node
+  48702:1,
+  # set country
+  48702:10032
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+c
+None
+matche pas:
+ommunity-set COMS_DC_ELECTRABEL
+  48702:700
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+c
+None
+matche pas:
+ommunity-set COMS_MGMT_RTIP_DCB
+  48702:909
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+c
+None
+matche pas:
+ommunity-set COMS_PREFIX_ON0206
+  48702:206
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+c
+None
+matche pas:
+ommunity-set COMS_PREFIX_ON0207
+  48702:207
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+c
+None
+matche pas:
+ommunity-set COMS_PREFIX_ON0208
+  48702:208
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+c
+None
+matche pas:
+ommunity-set COMS_PREFIX_ON0209
+  48702:209
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+c
+None
+matche pas:
+ommunity-set COMS_PREFIX_ON0211
+  48702:211
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+c
+None
+matche pas:
+ommunity-set COMS_PREFIX_ON_ALL
+  48702:[200..219]
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+c
+None
+matche pas:
+ommunity-set COMS_PREFIX_STATIC
+  48702:101
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+c
+None
+matche pas:
+ommunity-set COMS_FUSION_CLUSTER
+  64669:*
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+c
+None
+matche pas:
+ommunity-set COMS_DC_ADMIN_SHARED
+  48702:714
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+c
+None
+matche pas:
+ommunity-set COMS_DC_GRP_EXTERNAL
+  48702:704
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+c
+None
+matche pas:
+ommunity-set COMS_DC_GRP_INTERNAL
+  48702:703
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+c
+None
+matche pas:
+ommunity-set COMS_PREFIX_CONNECTED
+  48702:100
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+c
+None
+matche pas:
+ommunity-set COMS_MGMT_MAGNOLIA_GRT
+  48702:908
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+c
+None
+matche pas:
+ommunity-set COMS_AIM_PARTNER_TO_ANY
+  48702:289
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+c
+None
+matche pas:
+ommunity-set COMS_PREFIX_AIM_DEFAULT
+  48702:280
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-set
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+pl editor vim
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_PIC
+  set path-selection backup 1 install
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy jlinsen
+  if destination in jlinsen then
+    pass
+  else
+    drop
+  endif
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_PRIM_PE_IN
+  # generic policy, do not change without approval
+  set local-preference $LPREF_PRIM_PE
+  set med $MED_PRIM_PE
+  set community COMS_INJECT_POINT additive
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_SECO_PE_IN
+  # generic policy, do not change without approval
+  set local-preference $LPREF_SECO_PE
+  set med $MED_SECO_PE
+  set community COMS_INJECT_POINT additive
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_PRIM_PE_OUT
+  # generic policy, do not change without approval
+  set med $MED_PRIM_PE
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_SECO_PE_OUT($AS_TO_PREPEND)
+  # generic policy, do not change without approval
+  set med $MED_SECO_PE
+  prepend as-path $AS_TO_PREPEND 2
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_PRIMARY_PE_IN
+  set local-preference $LPREF_PRIM_PE
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_DEFAULT_TO_BGP
+  set community COMS_INJECT_POINT
+  set community COMS_PREFIX_STATIC additive
+  set local-preference $LPREF_PRIM_PE
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_PRIMARY_PE_OUT
+  set med $MED_PRIM_PE
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_AIM_DCC_PRIM_IN
+  apply RPL_PRIM_PE_IN
+  apply RPL_AIM_VALID_PREFIX_IN
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_DROP_AIM_DEFAULT
+  # generic policy, do not change without approval
+  if community matches-any COMS_PREFIX_AIM_DEFAULT then
+    drop
+  endif
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_PRIM_DEF_ONLY_OUT
+  if destination in PFX_DEFAULT then
+    apply RPL_PRIM_PE_OUT
+  else
+    drop
+  endif
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_REDIS_CONN_TO_BGP
+  # generic policy, do not change without approval
+  set community COMS_INJECT_POINT additive
+  set community COMS_PREFIX_CONNECTED additive
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_VPN0091_EXPORTMAP
+  if destination in PFX_VPN0091_EXPORT_SET_RT_48702_91034_ADD then
+    set extcommunity rt (48702:91034) additive
+  elseif community matches-any COMS_PREFIX_CONNECTED then
+    set extcommunity rt (48702:91030) additive
+  elseif community matches-any COMS_MGMT_RTIP_DCB then
+    set extcommunity rt (48702:91909) additive
+  elseif community matches-any COMS_MGMT_MAGNOLIA_GRT then
+    set extcommunity rt (48702:91904) additive
+  elseif community matches-any (48666:1231) then
+    set extcommunity rt (48702:91031) additive
+  elseif community matches-any (48666:1232) then
+    set extcommunity rt (48702:91032) additive
+  elseif community matches-any (48666:1233) then
+    set extcommunity rt (48702:91033) additive
+  elseif community matches-any (48666:1234) then
+    set extcommunity rt (48702:91034) additive
+  elseif community matches-any (48666:1240) then
+    set extcommunity rt (48702:91040) additive
+  endif
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_VPN0091_IMPORTMAP
+  if destination in PFX_NOLEAK_TO_VPN0091 and extcommunity rt matches-any EXTCOMS_RT_ECL_VPN0103 then
+    set local-preference 2222
+  else
+    pass
+  endif
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_VPN0101_EXPORTMAP
+  if destination in PFX_DEFAULT then
+    set extcommunity rt (48702:101035) additive
+  elseif community matches-any COMS_PREFIX_CONNECTED then
+    set extcommunity rt (48702:101030) additive
+  elseif destination in PFX_VPN0101_FTP_HUB then
+    set extcommunity rt (48702:101024, 48702:101032) additive
+  elseif community matches-any (48666:1132) then
+    set extcommunity rt (48702:101032) additive
+  elseif community matches-any (48666:1135) then
+    set extcommunity rt (48702:101035) additive
+  elseif community matches-any COMS_DC_GRP_EXTERNAL then
+    set extcommunity rt EXTCOMS_RT_IMPORT_FROM_GROUP additive
+  endif
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_VPN0102_EXPORTMAP
+  if destination in PFX_VPN0102_EXPORT_TO_VPN0101_NOT_VPN0091 then
+    set extcommunity rt (48702:101200, 48702:101300) additive
+  elseif destination in PFX_VPN0102_ORES then
+    set extcommunity rt (48702:91900) additive
+  elseif destination in PFX_VPN0102_DENY_EXPORT then
+    done
+  elseif destination in PFX_VPN0102_OFFICIAL_SUBNETS then
+    set extcommunity rt (48702:91900, 48702:101200, 48702:101300) additive
+  elseif destination in PFX_VPN0102_NON-COMPLIANT_SUBNETS-VSEBL then
+    set extcommunity rt (48702:91900, 48702:101300) additive
+  elseif destination in PFX_VPN0102_WWW_ACC_VIA_AIM_EBL_FOR_VPN0101 then
+    set extcommunity rt (48702:101500) additive
+  elseif destination in PFX_VPN0102_NON-COMPLIANT_SUBNETS then
+    set extcommunity rt (48702:91900, 48702:101300) additive
+  endif
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_VPN0104_EXPORTMAP
+  if destination in PFX_VPN0104_OFFICIAL_SUBNETS_DONT_TRUST then
+    set extcommunity rt (48702:91900, 48702:100200, 48702:101200, 48702:101300) additive
+  endif
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_VPN0105_EXPORTMAP
+  if destination in PFX_VPN0105_OFFICIAL_SUBNETS then
+    set community (48702:105) additive
+    set extcommunity rt (48702:91900, 48702:101200, 48702:101300) additive
+  endif
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_VPN0105_IMPORTMAP
+  if community matches-any COMS_FUSION_CLUSTER then
+    done
+  elseif community matches-any (48702:1003, 48702:1006) then
+    done
+  elseif community matches-any (48702:1011) then
+    done
+  elseif community matches-any (48702:1002) then
+    set local-preference 2222
+  else
+    pass
+  endif
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_VPN0106_IMPORTMAP
+  if community matches-any COMS_FUSION_CLUSTER then
+    done
+  elseif community matches-any (48702:1003, 48702:1006) then
+    done
+  elseif community matches-any (48702:1011) then
+    done
+  elseif community matches-any (48702:1002) then
+    set local-preference 2222
+  else
+    pass
+  endif
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_VPN0107_EXPORTMAP
+  if destination in PFX_VPN0107_OFFICIAL_SUBNETS then
+    set extcommunity rt (48702:101300) additive
+  endif
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_VPN0113_EXPORTMAP
+  if destination in PFX_VPN0113_OFFICIAL_SUBNETS then
+    set extcommunity rt (48702:91900, 48702:101200, 48702:101300) additive
+  else
+    pass
+  endif
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_VPN0148_IMPORTMAP
+  if destination in PFX_DEFAULT and community matches-any COMS_LOC_FR then
+    set local-preference 1111
+  else
+    pass
+  endif
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_VPN1001_EXPORTMAP
+  if destination in PFX_VPN1001_INTERCO_RANGE then
+    set extcommunity rt (48702:101200, 48702:101300) additive
+  elseif community matches-any COMS_AIM_PARTNER_TO_ANY then
+    set extcommunity rt (48702:101200, 48702:101300, 48702:100200) additive
+  elseif community matches-any COMS_DC_EMT then
+    set extcommunity rt (48702:101200, 48702:101300, 48702:100200, 48702:91900) additive
+    # networks received from EMT_SAZ leaked into SH_GROUP SH_GIN SH_ADMIN
+  elseif community matches-any (48702:[201..219]) then
+    set extcommunity rt (48702:101200, 48702:101300, 48702:100200, 48702:91900) additive
+    # networks received from ANY ON_SEGMENT leaked into SH_GROUP SH_GIN SH_ADMIN
+  elseif destination in PFX_VPN1001_PARTNER_ECONOCOM then
+    set extcommunity rt (48702:100200) additive
+  endif
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_VPN1001_IMPORTMAP
+  if community matches-any COMS_PREFIX_AIM_DEFAULT and community matches-any COMS_LOC_FR then
+    set local-preference 1111
+  else
+    pass
+  endif
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_VPN1001_TO_AIM_OUT
+  if destination in PFX_VPN1001_INTERCO_RANGE then
+    apply RPL_PRIM_PE_OUT
+  elseif extcommunity rt matches-any (48702:91000) then
+    apply RPL_PRIM_PE_OUT
+  elseif community matches-any COMS_DC_EMT or community matches-any COMS_GDC_DC or community matches-any COMS_DC_ELECTRABEL or community matches-any COMS_PREFIX_ON_ALL or community matches-any (48702:[281..289]) then
+    apply RPL_PRIM_PE_OUT
+  endif
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_AIM_VALID_PREFIX_IN
+  # generic policy, do not change without approval
+  if community matches-any (48702:[280..289]) then
+    pass
+  else
+    drop
+  endif
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_PRIM_PE_IN_temp_test
+  # generic policy, do not change without approval
+  set local-preference $LPREF_PRIM_PE
+  set med $MED_PRIM_PE
+  set community COMS_INJECT_POINT additive
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_VPN0101_DEFAULT_TO_BGP
+  set community COMS_INJECT_POINT
+  set community COMS_PREFIX_STATIC additive
+  set local-preference $LPREF_PRIM_PE
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_IAF_VPN0208_DCC_PASSIVE
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_IAF_VPN0209_DCC_PASSIVE
+  prepend as-path 65534 5
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_IAF_VPN0211_DCC_PASSIVE
+  prepend as-path 65526 5
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_IAF_VPN1001_DCC_PASSIVE
+  prepend as-path 65535 5
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_VPN0101_SR003_PRIM_PE_IN
+  apply RPL_PRIM_PE_IN
+  set community COMS_DC_GRP_EXTERNAL additive
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_VPN0101_SR003_SECO_PE_IN
+  apply RPL_SECO_PE_IN
+  set community COMS_DC_GRP_EXTERNAL additive
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_VPN1000_SR003_PRIM_PE_IN
+  apply RPL_PRIM_PE_IN
+  set community COMS_DC_GRP_SIZ additive
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_VPN1000_SR003_SECO_PE_IN
+  apply RPL_SECO_PE_IN
+  set community COMS_DC_GRP_SIZ additive
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_VPN1101_SR003_PRIM_PE_IN
+  apply RPL_PRIM_PE_IN
+  set community COMS_DC_GRP_INTERNAL additive
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_VPN1101_SR003_SECO_PE_IN
+  apply RPL_SECO_PE_IN
+  set community COMS_DC_GRP_INTERNAL additive
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_REDIS_CONN_TO_BGP_VPN0206
+  apply RPL_REDIS_CONN_TO_BGP
+  set community COMS_PREFIX_ON0206 additive
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_REDIS_CONN_TO_BGP_VPN0207
+  apply RPL_REDIS_CONN_TO_BGP
+  set community COMS_PREFIX_ON0207 additive
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_REDIS_CONN_TO_BGP_VPN0208
+  apply RPL_REDIS_CONN_TO_BGP
+  set community COMS_PREFIX_ON0208 additive
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_REDIS_CONN_TO_BGP_VPN0209
+  apply RPL_REDIS_CONN_TO_BGP
+  set community COMS_PREFIX_ON0209 additive
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_REDIS_CONN_TO_BGP_VPN0211
+  apply RPL_REDIS_CONN_TO_BGP
+  set community COMS_PREFIX_ON0211 additive
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_REDIS_STATIC_TO_BGP_PRIM_PE
+  # generic policy, do not change without approval
+  set community COMS_INJECT_POINT
+  set community COMS_PREFIX_STATIC additive
+  set local-preference $LPREF_PRIM_PE
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_REDIS_STATIC_TO_BGP_VPN0091
+  if tag is 91031 then
+    apply RPL_REDIS_STATIC_TO_BGP_PRIM_PE
+    set community (48666:1231) additive
+  elseif tag is 91032 then
+    apply RPL_REDIS_STATIC_TO_BGP_PRIM_PE
+    set community (48666:1232) additive
+  elseif tag is 91033 then
+    apply RPL_REDIS_STATIC_TO_BGP_PRIM_PE
+    set community (48666:1233) additive
+  elseif tag is 91034 then
+    apply RPL_REDIS_STATIC_TO_BGP_PRIM_PE
+    set community (48666:1234) additive
+  elseif tag is 91040 then
+    apply RPL_REDIS_STATIC_TO_BGP_PRIM_PE
+    set community (48666:1240) additive
+  endif
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_REDIS_STATIC_TO_BGP_VPN0101
+  if tag is 101032 then
+    apply RPL_REDIS_STATIC_TO_BGP_PRIM_PE
+    set community (48666:1132) additive
+  elseif tag is 101035 then
+    apply RPL_REDIS_STATIC_TO_BGP_PRIM_PE
+    set community (48666:1135) additive
+  endif
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_REDIS_STATIC_TO_BGP_VPN0102
+  if destination in PFX-VPN0102_SATELLITE or destination in PFX_VPN0102_WWW_ACC_VIA_AIM_EBL_FOR_VPN0101 then
+    apply RPL_REDIS_STATIC_TO_BGP_PRIM_PE
+    set weight 0
+  elseif tag eq 102001 then
+    apply RPL_REDIS_STATIC_TO_BGP_PRIM_PE
+  elseif tag eq 102005 then
+    apply RPL_REDIS_STATIC_TO_BGP_PRIM_PE
+  endif
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_REDIS_STATIC_TO_BGP_VPN0206
+  apply RPL_REDIS_STATIC_TO_BGP_PRIM_PE
+  set community (48702:206) additive
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_PRIM_PE_IN_temp_localpop_DCB
+  # temp policy - adds 48702:1003 on top of 48702:1011
+  apply RPL_PRIM_PE_IN
+  set community (48702:1003) additive
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_VPN1001_TO_AIM_ON_PRIM_PE_OUT
+  if destination in PFX_VPN0101_IDENT_AWARENESS then
+    apply RPL_PRIM_PE_OUT
+  elseif destination in PFX_VPN0101_SH_GIN_FOR_ECONOCOM_BEHIND_AIM_ON then
+    apply RPL_PRIM_PE_OUT
+  endif
+  apply RPL_VPN1001_TO_AIM_OUT
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_VPN1001_to_AIM_ON_PRIM_PE_OUT
+  apply RPL_DROP_AIM_DEFAULT
+  apply RPL_PRIM_PE_OUT
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+oute-policy RPL_VPN0101_DEFAULT_TO_BGP_PRIM_PE
+  set community COMS_INJECT_POINT
+  set community COMS_PREFIX_STATIC additive
+  set local-preference $LPREF_PRIM_PE
+
+None
+matche pas:
+e
+None
+matche pas:
+nd-policy
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+outer static
+ vrf MGMT
+  address-family ipv4 unicast
+   ! Out-of-band management servers BE
+   10.91.0.0/18 MgmtEth0/RSP0/CPU0/0 10.91.108.1
+   ! Out-of-band management network
+   10.91.96.0/19 MgmtEth0/RSP0/CPU0/0 10.91.108.1
+   ! Out-of-band management servers FR
+   10.146.244.0/26 MgmtEth0/RSP0/CPU0/0 10.91.108.1
+   171.26.236.114/32 MgmtEth0/RSP0/CPU0/0 10.91.108.1
+  !
+ !
+ vrf VPN0091
+  address-family ipv4 unicast
+   10.24.152.48/28 Bundle-Ether11.1910 10.91.97.52 tag 91032 description " AIM-S2-MGMT via ADMIN FW"
+   10.88.160.0/23 Bundle-Ether11.1910 10.91.97.52 tag 91031 description "S1 ADMIN via Admin FW"
+   10.88.176.0/23 Bundle-Ether11.1910 10.91.97.52 tag 91031 description "S1 ADMIN via Admin FW"
+   10.89.160.0/23 Bundle-Ether11.1910 10.91.97.52 tag 91031 description "S2 ADMIN via Admin FW"
+   10.89.176.0/23 Bundle-Ether11.1910 10.91.97.52 tag 91031 description "S2 ADMIN via Admin FW"
+   10.90.124.32/27 Bundle-Ether11.1910 10.91.97.52 tag 91031 description "DMZ ADMIN FW VL822"
+   10.90.125.0/28 Bundle-Ether11.1910 10.91.97.52 tag 91031 description "DMZ ADMIN FW VL804"
+   10.91.0.0/18 Bundle-Ether11.1910 10.91.97.52 tag 91034 description DCB-ISZ
+   10.91.2.0/24 Bundle-Ether11.1910 10.91.97.52 tag 91031 description "Atos Jump DCB via Admin FW"
+   10.91.32.0/22 Bundle-Ether11.1910 10.91.97.52 tag 91031 description NMS-in-DCB-ISZ
+   10.91.34.32/28 Bundle-Ether11.1910 10.91.97.52 tag 91031 description "SPLUNK DMZ DCB ADMIN FW"
+   10.91.34.48/29 Bundle-Ether11.1910 10.91.97.52 tag 91031 description "SPLUNK DMZ S2 ADMIN FW"
+   10.91.34.64/28 Bundle-Ether11.1910 10.91.97.52 tag 91031 description "SPLUNK DMZ S2 ADMIN FW"
+   10.91.34.192/26 Bundle-Ether11.1910 10.91.97.52 tag 91031 description "DMZ ADMIN FW DCB"
+   10.91.68.0/22 Bundle-Ether11.1910 10.91.97.52 tag 91031 description "DCB SBZ via Admin FW"
+   10.91.72.0/21 Bundle-Ether11.1910 10.91.97.52 tag 91031 description "ISZ S2 via Admin FW"
+   10.91.96.0/19 Bundle-Ether11.1910 10.91.97.52 tag 91031 description OOB
+   10.91.100.7/32 Bundle-Ether11.1910 10.91.97.52 tag 91009 description GSFR0S1-PE100103
+   10.91.100.8/32 Bundle-Ether11.1910 10.91.97.52 tag 91009 description GSFR0S1-PE100104
+   10.91.104.7/32 Bundle-Ether11.1910 10.91.97.52 tag 91009 description GSFR0S2-PE100203
+   10.91.104.8/32 Bundle-Ether11.1910 10.91.97.52 tag 91009 description GSFR0S2-PE100204
+   10.91.108.7/32 Bundle-Ether11.1910 10.91.97.52 tag 91009 description GSBEDCB-PE100303
+   10.91.108.8/32 Bundle-Ether11.1910 10.91.97.52 tag 91009 description GSBEDCB-PE100304
+   10.91.109.96/28 Bundle-Ether11.1910 10.91.97.52 tag 91031 description "DMZ ADMIN FW - ALGOSEC"
+   10.109.64.0/18 Bundle-Ether11.1910 10.91.97.52 tag 91031 description "S3 ADMIN via Admin FW"
+   10.109.248.0/21 Bundle-Ether11.1910 10.91.97.52 tag 91031 description "S3 ADMIN viaAdmin FW"
+   10.146.232.0/22 Bundle-Ether11.1910 10.91.97.52 tag 91031 description "S4 SBZ via Admin FW"
+   10.146.240.0/21 Bundle-Ether11.1910 10.91.97.52 tag 91031 description "S4 ISZ VPN1114 ADMIN FW"
+   10.172.114.0/23 Bundle-Ether11.1910 10.91.97.52 tag 91031 description "GDC ISZ UCC via Admin FW"
+   10.172.192.0/21 Bundle-Ether11.1910 10.91.97.52 tag 91031 description " NGWP SP Zone - GDC VPN1143"
+   10.172.200.0/21 Bundle-Ether11.1910 10.91.97.52 tag 91031 description " NGWP SP Zone - GDC VPN1143"
+   10.172.208.0/24 Bundle-Ether11.1910 10.91.97.52 tag 91031 description "GDC SBZ via Admin FW"
+   10.172.212.0/22 Bundle-Ether11.1910 10.91.97.52 tag 91031 description "MGMT-IT DCE/DCQ Admin FW"
+   10.172.218.0/23 Bundle-Ether11.1910 10.91.97.52 tag 91031 description "MGMT-Sec DCE/DCQ Admin FW"
+   10.172.240.0/21 Bundle-Ether11.1910 10.91.97.52 tag 91031 description "GDC ISZ VPN1114 ADMIN FW"
+   10.172.249.248/29 Bundle-Ether11.1910 10.91.97.52 tag 91031 description "Dual-admin GDC Admin FW"
+   10.173.240.0/20 Bundle-Ether11.1910 10.91.97.52 tag 91031 description "GDC ISZ VPN1114 - ADMIN FW"
+   10.175.0.0/21 Bundle-Ether11.1910 10.91.97.52 tag 91031 description "Partners DCE/DCQ Admin FW"
+   10.231.128.0/19 Bundle-Ether11.1910 10.91.97.52 tag 91031 description "S0 ADMIN NAT via Admin FW"
+   10.248.64.0/18 Bundle-Ether11.1910 10.91.97.52 tag 91031 description "S1 ADMIN via Admin FW"
+   10.248.240.0/20 Bundle-Ether11.1910 10.91.97.52 tag 91031 description "S1 ADMIN via Admin FW"
+   10.249.64.0/18 Bundle-Ether11.1910 10.91.97.52 tag 91031 description "S2 ADMIN via Admin FW"
+   10.249.240.0/20 Bundle-Ether11.1910 10.91.97.52 tag 91031 description "S2 ADMIN via Admin FW"
+   148.143.123.0/24 Bundle-Ether11.1910 10.91.97.52 tag 91031 description "S3 ADMIN via Admin FW"
+   171.26.174.0/26 Bundle-Ether11.1910 10.91.97.52 tag 91031 description ILO-in-DCB-ISZ
+   171.26.174.64/27 Bundle-Ether11.1910 10.91.97.52 tag 91031 description ILO-in-DCB-ISZ
+   171.26.183.251/32 Bundle-Ether11.1910 10.91.97.52 tag 91031 description "EBSR05 MGMT Admin FW"
+   171.26.183.252/32 Bundle-Ether11.1910 10.91.97.52 tag 91031 description "EWSR05 MGMT Admin FW"
+   171.26.247.0/24 Bundle-Ether11.1910 10.91.97.52 tag 91031 description "VPN1114 Admin FW"
+   172.24.0.0/24 Bundle-Ether11.1910 10.91.97.52 tag 91008 description MAGNOLIA-GRT
+   172.24.32.0/21 Bundle-Ether11.1910 10.91.97.52 tag 91008 description MAGNOLIA-GRT
+   192.168.32.0/24 Bundle-Ether11.1910 10.91.97.52 tag 91032 description "DMZ-MGMT-RIB via ADMIN FW"
+   192.168.66.128/28 Bundle-Ether11.1910 10.91.97.52 tag 91031 description ILO-in-DCB-ISZ
+   192.168.76.0/22 Bundle-Ether11.1910 10.91.97.52 tag 91031 description ILO-in-DCB-ISZ
+   192.168.149.160/27 Bundle-Ether11.1910 10.91.97.52 tag 91031 description ILO-in-DCB-ISZ
+   192.168.240.192/26 Bundle-Ether11.1910 10.91.97.52 tag 91032 description " DMZ-MGMT via ADMIN FW"
+   194.29.98.32/27 Bundle-Ether11.1910 10.91.97.52 tag 91031 description "DMZ ADMIN FW CP MDM"
+   194.29.98.160/27 Bundle-Ether11.1910 10.91.97.52 tag 91031 description "DMZ ADMIN FW CP MDM-Log"
+  !
+ !
+ vrf VPN0097
+  address-family ipv4 unicast
+   10.91.0.0/18 Bundle-Ether11.1970 172.24.37.28
+   10.109.23.96/27 Bundle-Ether11.1970 172.24.37.28
+   10.146.244.0/26 Bundle-Ether11.1970 172.24.37.28 description "S4 spectrum DCB ADMIN FW"
+   10.248.22.192/27 Bundle-Ether11.1970 172.24.37.28
+   10.249.22.192/27 Bundle-Ether11.1970 172.24.37.28
+   163.110.67.172/30 Bundle-Ether11.1970 172.24.37.28
+   163.110.168.26/32 Bundle-Ether11.1970 172.24.37.28
+   172.18.61.0/24 Bundle-Ether11.1970 172.24.37.28
+  !
+ !
+ vrf VPN0101
+  address-family ipv4 unicast
+   0.0.0.0/0 Bundle-Ether11.1013 10.50.1.100 tag 101035 description "default to AIM Host Grp"
+   10.64.10.192/27 Bundle-Ether11.1013 10.50.1.100 tag 101032 description "AIM Bxl range Host Grp"
+   10.64.10.208/28 Bundle-Ether11.1013 10.50.1.100 tag 101032 description "AIM Bxl range Host Grp"
+   10.64.136.0/28 Bundle-Ether11.1013 10.50.1.100 tag 101032 description "AIM Bxl range Host Grp"
+   10.66.16.0/26 Bundle-Ether11.1013 10.50.1.100 tag 101032 description "AIM Bxl VRF Tech Ext"
+   10.66.16.160/27 Bundle-Ether11.1013 10.50.1.100 tag 101032 description "AIM Bxl VRF Tech Ext"
+   10.66.16.208/28 Bundle-Ether11.1013 10.50.1.100 tag 101032 description "AIM Bxl VRF Tech Ext"
+   10.66.16.224/28 Bundle-Ether11.1013 10.50.1.100 tag 101032 description "AIM Bxl VRF Tech Ext"
+   10.66.16.240/28 Bundle-Ether11.1013 10.50.1.100 tag 101032 description "AIM Bxl VRF Tech Ext"
+   10.66.17.0/27 Bundle-Ether11.1013 10.50.1.100 tag 101032 description "AIM Bxl VRF Tech Ext"
+   10.90.100.0/28 Bundle-Ether11.1012 10.50.1.116 tag 101032 description "AIM Bxl range Serv Grp"
+   10.90.108.0/22 Bundle-Ether11.1013 10.50.1.100 tag 101032 description "AIM Bxl range Host Grp"
+   10.90.112.0/22 Bundle-Ether11.1012 10.50.1.116 tag 101032 description "AIM Bxl range Serv Grp"
+   10.90.118.0/29 Bundle-Ether11.1013 10.50.1.100 tag 101032 description "AIM Bxl range Host Grp"
+   10.90.118.16/29 Bundle-Ether11.1013 10.50.1.100 tag 101032 description "AIM Bxl range Host Grp"
+   10.90.118.144/29 Bundle-Ether11.1012 10.50.1.116 tag 101032 description "BYOD - ISE DMZ"
+   10.90.118.192/26 Bundle-Ether11.1012 10.50.1.116 tag 101032 description "BYIOD users ranges"
+   10.90.119.0/28 Bundle-Ether11.1012 10.50.1.116 tag 101032 description "AIM Bxl range Serv Grp"
+   10.90.124.0/28 Bundle-Ether11.1013 10.50.1.100 tag 101032 description "AIM Bxl range Host Grp"
+   10.90.124.16/28 Bundle-Ether11.1012 10.50.1.116 tag 101032 description "AIM Bxl range Host Grp"
+   10.90.124.64/26 Bundle-Ether11.1013 10.50.1.100 tag 101032 description "AIM Bxl range Host Grp"
+   10.90.124.128/28 Bundle-Ether11.1012 10.50.1.116 tag 101032 description "RADIUS IA VSX Serv Group"
+   10.90.124.144/28 Bundle-Ether11.1012 10.50.1.116 tag 101032 description "AIM Bxl range Serv Grp"
+   10.90.124.160/27 Bundle-Ether11.1012 10.50.1.116 tag 101032 description "AIM Bxl range Serv Grp"
+   10.90.124.192/26 Bundle-Ether11.1012 10.50.1.116 tag 101032 description "AIM Bxl range Serv Grp"
+   10.90.125.32/27 Bundle-Ether11.1012 10.50.1.116 tag 101032 description "AIM Bxl range Serv Grp"
+   10.90.125.64/26 Bundle-Ether11.1012 10.50.1.116 tag 101032 description "AIM Bxl range Serv Grp"
+   10.90.125.192/26 Bundle-Ether11.1012 10.50.1.116 tag 101032 description "AIM Bxl range Serv Grp"
+   10.90.126.0/23 Bundle-Ether11.1012 10.50.1.116 tag 101032 description "AIM Bxl range Serv Grp"
+   10.90.160.0/20 Bundle-Ether11.1013 10.50.1.100 tag 101032 description "AIM Bxl range Host Grp"
+   10.149.247.0/24 Bundle-Ether11.1012 10.50.1.116 tag 101032 description "AIM Bxl NC range Serv Grp"
+   10.169.129.0/24 Bundle-Ether11.1012 10.50.1.116 tag 101035 description "AIM SRVGROUP Econocom"
+   194.29.97.66/32 Bundle-Ether11.1012 10.50.1.116 tag 101032 description "AIM Bxl WiFi Blueguest 1"
+   194.29.97.113/32 Bundle-Ether11.1012 10.50.1.116 tag 101032 description "AIM BE SSL-VPN Serv Grp"
+   194.29.97.128/26 Bundle-Ether11.1012 10.50.1.116 tag 101032 description "AIM Bxl range Serv Grp"
+   194.29.98.97/32 Bundle-Ether11.1012 10.50.1.116 tag 101032 description "AIM Bxl range Serv Grp"
+   194.29.98.128/27 Bundle-Ether11.1012 10.50.1.116 tag 101032 description "AIM Bxl range Serv Grp"
+   194.29.98.217/32 Bundle-Ether11.1012 10.50.1.116 tag 101032 description "AIM BE SSL-VPN Serv Grp"
+   194.29.98.220/32 Bundle-Ether11.1012 10.50.1.116 tag 101032 description "AIM BE SSL-VPN Serv Grp"
+   194.29.98.222/32 Bundle-Ether11.1012 10.50.1.116 tag 101032 description "AIM BE SSL-VPN Serv Grp"
+   194.29.98.225/32 Bundle-Ether11.1012 10.50.1.116 tag 101032 description "AIM BE SSL-VPN Serv Grp"
+   194.29.98.226/32 Bundle-Ether11.1012 10.50.1.116 tag 101032 description "AIM BE SSL-VPN Serv Grp"
+   194.29.98.227/32 Bundle-Ether11.1012 10.50.1.116 tag 101032 description "AIM Bxl range Serv Grp"
+   194.29.98.229/32 Bundle-Ether11.1012 10.50.1.116 tag 101032 description "AIM BE SSL-VPN Serv Grp"
+   194.29.98.233/32 Bundle-Ether11.1012 10.50.1.116 tag 101032 description "AIM BE SSL-VPN Serv Grp"
+   194.29.98.234/32 Bundle-Ether11.1012 10.50.1.116 tag 101032 description "AIM BE SSL-VPN Serv Grp"
+   194.29.98.240/28 Bundle-Ether11.1012 10.50.1.116 tag 101032 description "AIM Bxl range Serv Grp"
+  !
+ !
+ vrf VPN0102
+  address-family ipv4 unicast
+   0.0.0.0/0 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   10.20.16.0/22 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   10.20.20.0/22 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   10.25.112.0/20 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL WindTurbines"
+   10.26.136.128/25 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM EBL STERIA CRM-NL"
+   10.26.137.0/24 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL - SCADA CWE"
+   10.26.138.0/24 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL - SCADA CWE"
+   10.26.192.0/23 Bundle-Ether11.502 10.50.5.116 tag 102001 description "Satlynx Doel Tihange"
+   10.63.28.48/29 Bundle-Ether11.502 10.50.5.116 250 tag 102001 description "Satl elbexlc-VL10 Barr Chiny"
+   10.63.28.56/29 Bundle-Ether11.502 10.50.5.116 250 tag 102001 description "Satl elbexlc-VL10 LORCE"
+   10.63.28.96/29 Bundle-Ether11.502 10.50.5.116 250 tag 102001 description "elbexlc-VL900 Barr Chiny"
+   10.63.28.104/29 Bundle-Ether11.502 10.50.5.116 250 tag 102001 description "Satl elbexlv Barr Haut"
+   10.63.152.160/29 Bundle-Ether11.502 10.50.5.116 250 tag 102001 description "Satlynx elbexlc-VL900 LORCE"
+   10.64.5.32/28 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   10.64.5.35/32 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   10.64.5.64/26 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   10.64.10.64/26 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   10.64.10.128/26 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   10.64.81.0/26 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   10.64.84.0/22 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   10.64.96.0/24 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   10.64.97.0/24 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   10.64.98.0/24 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   10.64.99.0/24 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   10.64.100.0/24 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   10.64.101.0/24 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   10.64.102.0/24 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   10.64.103.0/24 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   10.64.104.0/24 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   10.64.128.0/25 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   10.64.128.128/27 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   10.64.128.160/27 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   10.64.128.192/26 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   10.64.129.0/24 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   10.64.133.0/27 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   10.64.134.0/24 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   10.64.135.0/24 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   10.64.137.96/28 Bundle-Ether11.502 10.50.5.116 250 tag 102001 description "Satl elbexlc_VL30 Bas Chiny"
+   10.64.137.112/28 Bundle-Ether11.502 10.50.5.116 250 tag 102001 description "Satl elbexlv_VL30 Barr Haut"
+   10.64.137.128/28 Bundle-Ether11.502 10.50.5.116 250 tag 102001 description "Satlynx elbexlc-VL30 LORCE"
+   10.64.192.0/28 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   10.65.239.0/27 Bundle-Ether11.502 10.50.5.116 tag 102001 description "ECONOCOM EBL NL range"
+   10.69.0.0/16 GigabitEthernet0/0/0/2.110 192.168.39.20 tag 102001 description "N-ALLO range"
+   10.90.104.0/22 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   10.90.104.32/29 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   10.90.104.40/29 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   10.90.105.0/24 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   10.90.120.0/23 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   10.90.122.0/23 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   10.90.130.0/23 Bundle-Ether11.502 10.50.5.116 tag 102001 description ELBETRL
+   10.90.136.0/22 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   10.90.140.0/22 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   10.90.144.0/24 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL mgmt"
+   10.90.145.0/24 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   10.90.146.0/24 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   10.149.0.0/20 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL RAS IP-pool"
+   10.169.129.0/24 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM EBL Econocom"
+   10.254.192.254/32 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   62.213.198.199/32 Bundle-Ether11.502 10.50.5.116 tag 102005 description "AIM Bxl VSEBL VPN Dest"
+   67.223.64.0/19 Bundle-Ether11.502 10.50.5.116 tag 102500 description "VPN0101_to_www_via_AIM_EBL"
+   68.171.224.0/19 Bundle-Ether11.502 10.50.5.116 tag 102500 description "VPN0101_to_www_via_AIM_EBL"
+   68.171.232.35/32 Bundle-Ether11.502 10.50.5.116 tag 102500 description "VPN0101_to_www_via_AIM_EBL"
+   68.171.232.36/32 Bundle-Ether11.502 10.50.5.116 tag 102500 description "VPN0101_to_www_via_AIM_EBL"
+   68.171.242.252/32 Bundle-Ether11.502 10.50.5.116 tag 102500 description "VPN0101_to_www_via_AIM_EBL"
+   69.191.247.60/32 Bundle-Ether11.502 10.50.5.116 tag 102500 description "VPN0101_to_www_via_AIM_EBL"
+   78.41.70.45/32 Bundle-Ether11.502 10.50.5.116 tag 102005 description "AIM Bxl VSEBL VPN Dest"
+   82.201.63.48/29 Bundle-Ether11.502 10.50.5.116 tag 102001 description "return WideXS from group"
+   83.138.133.130/32 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   91.193.133.40/29 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range VPN Conc"
+   91.223.202.34/32 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   93.186.16.0/20 Bundle-Ether11.502 10.50.5.116 tag 102500 description "VPN0101_to_www_via_AIM_EBL"
+   160.43.251.60/32 Bundle-Ether11.502 10.50.5.116 tag 102500 description "VPN0101_to_www_via_AIM_EBL"
+   171.26.32.128/25 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   171.26.107.8/29 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   172.16.3.224/28 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   172.17.0.0/22 GigabitEthernet0/0/0/2.110 192.168.39.20 tag 102001 description "N-ALLO range"
+   172.50.0.0/29 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   172.50.2.11/32 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   172.50.2.23/32 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   172.50.2.24/32 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   172.50.2.34/32 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   172.50.2.38/32 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   192.168.12.85/32 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   192.168.13.0/24 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   192.168.31.64/26 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   192.168.54.24/32 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   192.168.69.0/24 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   192.168.107.0/24 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   192.168.108.0/22 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   192.168.138.0/29 Bundle-Ether11.502 10.50.5.116 250 tag 102001 description "Satlynx elbexlc-VL230 LORCE"
+   192.168.138.96/29 Bundle-Ether11.502 10.50.5.116 250 tag 102001 description "Satl elbexlc-VL230Barr Chiny"
+   192.168.138.128/28 Bundle-Ether11.502 10.50.5.116 250 tag 102001 description "Satlynx elbexlo-VL230 Lorce"
+   192.168.201.0/24 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   192.168.202.0/24 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   192.168.203.0/24 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   192.168.229.0/24 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   192.168.230.16/28 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   192.168.231.0/24 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   192.168.238.0/24 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   192.168.240.32/27 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   192.168.241.160/27 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   192.168.242.0/23 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   192.168.245.0/24 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   192.168.246.0/24 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   192.168.246.128/26 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   192.168.247.0/24 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   192.168.248.0/24 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   192.168.249.48/28 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   192.168.249.64/27 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   192.168.249.112/28 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   192.168.252.0/27 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   192.168.252.48/28 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   192.176.3.128/26 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   192.196.82.0/24 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   193.109.81.0/24 Bundle-Ether11.502 10.50.5.116 tag 102500 description "VPN0101_to_www_via_AIM_EBL"
+   193.109.81.33/32 Bundle-Ether11.502 10.50.5.116 tag 102500 description "VPN0101_to_www_via_AIM_EBL"
+   194.29.97.0/28 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   194.29.97.16/28 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   194.29.97.240/29 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   194.29.98.0/28 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   194.29.98.16/28 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   194.29.98.70/32 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   194.29.98.192/27 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   194.29.98.224/28 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   194.110.100.0/24 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   194.110.107.0/24 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   194.129.160.0/24 Bundle-Ether11.502 10.50.5.116 tag 102005 description "AIM Bxl VSEBL VPN Dest"
+   194.129.163.204/30 Bundle-Ether11.502 10.50.5.116 tag 102005 description "AIM Bxl VSEBL VPN Dest"
+   195.177.247.215/32 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM BE VSEBL range VPN Conc"
+   198.76.161.0/24 Bundle-Ether11.502 10.50.5.116 tag 102500 description "VPN0101_to_www_via_AIM_EBL"
+   204.187.87.0/24 Bundle-Ether11.502 10.50.5.116 tag 102500 description "VPN0101_to_www_via_AIM_EBL"
+   205.152.199.19/32 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM BE VSEBL range"
+   205.152.199.20/32 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM BE VSEBL range"
+   205.152.199.22/32 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM BE VSEBL range"
+   205.152.199.23/32 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM BE VSEBL range"
+   205.152.199.29/32 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM BE VSEBL range"
+   206.51.26.0/24 Bundle-Ether11.502 10.50.5.116 tag 102500 description "VPN0101_to_www_via_AIM_EBL"
+   206.53.144.0/20 Bundle-Ether11.502 10.50.5.116 tag 102500 description "VPN0101_to_www_via_AIM_EBL"
+   208.65.75.22/32 Bundle-Ether11.502 10.50.5.116 tag 102500 description "VPN0101_to_www_via_AIM_EBL"
+   208.65.77.22/32 Bundle-Ether11.502 10.50.5.116 tag 102500 description "VPN0101_to_www_via_AIM_EBL"
+   208.65.77.102/32 Bundle-Ether11.502 10.50.5.116 tag 102500 description "VPN0101_to_www_via_AIM_EBL"
+   216.9.240.0/20 Bundle-Ether11.502 10.50.5.116 tag 102500 description "VPN0101_to_www_via_AIM_EBL"
+   216.9.242.246/32 Bundle-Ether11.502 10.50.5.116 tag 102500 description "VPN0101_to_www_via_AIM_EBL"
+   216.9.242.247/32 Bundle-Ether11.502 10.50.5.116 tag 102500 description "VPN0101_to_www_via_AIM_EBL"
+   216.136.156.64/27 Bundle-Ether11.502 10.50.5.116 tag 102500 description "VPN0101_to_www_via_AIM_EBL"
+   217.67.37.180/32 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+   217.92.146.98/32 Bundle-Ether11.502 10.50.5.116 tag 102001 description "AIM Bxl VSEBL range"
+  !
+ !
+ vrf VPN0104
+  address-family ipv4 unicast
+   10.110.229.0/24 Bundle-Ether11.504 10.50.13.116 tag 104001 description "Econocom EU-Desk"
+   10.110.230.0/25 Bundle-Ether11.504 10.50.13.116 tag 104001 description "Bxl Econocom EU-Desk"
+   10.110.230.128/25 Bundle-Ether11.504 10.50.13.116 tag 104001 description " BxlEconocom EU-Desk SCCM"
+   10.110.231.0/25 Bundle-Ether11.504 10.50.13.116 tag 104001 description " Bxl Econocom EU-Desk "
+   10.110.231.128/25 Bundle-Ether11.504 10.50.13.116 tag 104001 description " Bxl Econocom EU-Desk"
+   10.110.237.0/24 Bundle-Ether11.504 10.50.13.116 tag 104001 description " Bxl Econocom FR-Skynote "
+   10.169.129.0/24 Bundle-Ether11.504 10.50.13.116 tag 104001 description " Econocom Skynote "
+  !
+ !
+ vrf VPN0113
+  address-family ipv4 unicast
+   10.66.0.0/22 Bundle-Ether11.513 10.50.49.116 description "Range ORES Mobile APN"
+   10.90.78.0/23 Bundle-Ether11.513 10.50.49.116 description "Range ORES to AIM VSORES"
+   10.90.90.0/28 Bundle-Ether11.513 10.50.49.116 description "Range ORES to AIM VSORES"
+   10.90.104.64/27 Bundle-Ether11.513 10.50.49.116 description "Range ORES_APN_PROXIMUS"
+   10.90.104.96/28 Bundle-Ether11.513 10.50.49.116 description "AIM ORES DMZ VLAN90"
+   10.90.147.0/24 Bundle-Ether11.513 10.50.49.116 description "Range ORES Azure"
+  !
+ !
+ vrf VPN0116
+  address-family ipv4 unicast
+   10.90.4.160/28 Bundle-Ether11.516 10.50.61.116
+   10.90.68.16/28 Bundle-Ether11.516 10.50.61.116
+   10.90.68.64/28 Bundle-Ether11.516 10.50.61.116
+   10.90.68.144/29 Bundle-Ether11.516 10.50.61.116
+   10.90.70.0/24 Bundle-Ether11.516 10.50.61.116
+   194.29.98.207/32 Bundle-Ether11.516 10.50.61.116
+   194.29.98.210/32 Bundle-Ether11.516 10.50.61.116
+  !
+ !
+ vrf VPN0130
+  address-family ipv4 unicast
+   0.0.0.0/0 Bundle-Ether11.530 10.90.119.134 tag 130001 description DEFAULT_RT_WIRED_GUEST
+  !
+ !
+ vrf VPN0135
+  address-family ipv4 unicast
+   0.0.0.0/0 GigabitEthernet0/0/0/2.26 10.69.254.97 tag 135001 description "N-ALLO range"
+   10.69.0.0/16 GigabitEthernet0/0/0/2.26 10.69.254.97 tag 135001 description "N-ALLO range"
+  !
+ !
+ vrf VPN0153
+  address-family ipv4 unicast
+   0.0.0.0/0 Bundle-Ether11.553 10.50.200.22 tag 153001 description "default to VS-SSC-GRP"
+  !
+ !
+ vrf VPN0206
+  address-family ipv4 unicast
+   10.90.74.80/29 Bundle-Ether11.1956 10.51.21.52 tag 206001 description OFFICENET_RAS
+   10.149.16.0/20 Bundle-Ether11.1956 10.51.21.52 tag 206001 description OFFICENET_RAS
+  !
+ !
+ vrf temp_test
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+outer ospf 48702
+ log adjacency changes
+ router-id 172.21.0.105
+ bfd minimum-interval 200
+ bfd fast-detect
+ bfd multiplier 3
+ authentication message-digest
+ message-digest-key 1 md5 encrypted 00210B122E7F06300502671D00
+ network point-to-point
+ mpls ldp sync
+ dead-interval 15
+ hello-interval 3
+ maximum paths 8
+ auto-cost reference-bandwidth 1000000
+ default-metric 65535
+ distance 19
+ max-metric router-lsa on-startup 60
+ max-metric router-lsa on-switchover 60
+ max-metric router-lsa on-proc-restart 60
+ area 0
+  interface Loopback48702
+   cost 1
+   passive enable
+  !
+  interface TenGigE0/0/1/0
+   cost 100
+  !
+  interface TenGigE0/0/1/1
+   cost 200
+  !
+  interface TenGigE0/0/2/0
+   cost 100
+  !
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps bgp
+
+None
+matche pas:
+r
+None
+matche pas:
+outer bgp 48702
+ bgp router-id 172.21.0.105
+ bgp graceful-restart restart-time 120
+ bgp graceful-restart stalepath-time 360
+ bgp graceful-restart
+ address-family vpnv4 unicast
+  ! Only consider
+  nexthop resolution prefix-length minimum 32
+ !
+ af-group VPNV4 address-family vpnv4 unicast
+  multipath
+ !
+ session-group IBGP
+  remote-as 48702
+  timers 7 21
+  advertisement-interval 0
+  password encrypted 012A040C790C122E25755C254D
+  update-source Loopback48702
+ !
+ neighbor-group VPN_RR_SERVER
+  address-family vpnv4 unicast
+   soft-reconfiguration inbound always
+  !
+ !
+ neighbor-group NBGRP_AIM_DCC_PRIM_PE
+  timers 10 30 3
+  advertisement-interval 0
+  password encrypted 033D59032408356D4A300B2943
+  description DCC_AIM_VSX
+  graceful-restart restart-time 120
+  graceful-restart stalepath-time 360
+  graceful-restart
+  address-family ipv4 unicast
+   send-community-ebgp
+   route-policy RPL_AIM_DCC_PRIM_IN in
+   route-policy RPL_PRIM_PE_OUT out
+  !
+ !
+ neighbor-group NBGRP_DCC2_SR003_ASN_65242
+  remote-as 65242
+  timers 3 9
+  advertisement-interval 0
+  password encrypted 10762128273F35383650100D711F613820
+  address-family ipv4 unicast
+   send-community-ebgp
+   route-policy RPL_PRIM_PE_IN in
+   route-policy RPL_PRIM_PE_OUT out
+  !
+ !
+ neighbor-group NBGRP_DCC3_SR003_ASN_65242
+  remote-as 65242
+  timers 3 9
+  advertisement-interval 0
+  password encrypted 133D3F2329242319117012156015410A14
+  address-family ipv4 unicast
+   send-community-ebgp
+   route-policy RPL_SECO_PE_IN in
+   route-policy RPL_SECO_PE_OUT(48702) out
+  !
+ !
+ neighbor-group NBGRP_DCC_IAF_ASN_64680_PRIM_PE
+  remote-as 64680
+  timers 3 9
+  advertisement-interval 0
+  password encrypted 11301B0D35151F2D001339087C
+  graceful-restart restart-time 120
+  graceful-restart stalepath-time 360
+  graceful-restart
+  address-family ipv4 unicast
+   send-community-ebgp
+   route-policy RPL_PRIM_PE_IN in
+   route-policy RPL_PRIM_PE_OUT out
+  !
+ !
+ neighbor 172.21.4.62
+  use session-group IBGP
+  use neighbor-group VPN_RR_SERVER
+  description GSFR0S1-RR001
+  address-family vpnv4 unicast
+   use af-group VPNV4
+  !
+ !
+ neighbor 172.21.4.94
+  use session-group IBGP
+  use neighbor-group VPN_RR_SERVER
+  description GSFRDCE-RR100799
+  address-family vpnv4 unicast
+   use af-group VPNV4
+  !
+ !
+ neighbor 172.21.4.126
+  use session-group IBGP
+  use neighbor-group VPN_RR_SERVER
+  description GSBEDCB-RR002
+  address-family vpnv4 unicast
+   use af-group VPNV4
+  !
+ !
+ vrf VPN0091
+  rd 48702:1011010091
+  address-family ipv4 unicast
+   additional-paths selection route-policy RPL_PIC
+   redistribute connected metric 100 route-policy RPL_REDIS_CONN_TO_BGP
+   redistribute static route-policy RPL_REDIS_STATIC_TO_BGP_VPN0091
+  !
+  neighbor 10.50.42.59
+  !
+  neighbor 10.50.42.60
+  !
+  neighbor 10.52.240.59
+   use neighbor-group NBGRP_DCC2_SR003_ASN_65242
+   address-family ipv4 unicast
+    as-override
+    site-of-origin 65242:101100911
+   !
+  !
+  neighbor 10.52.240.60
+   use neighbor-group NBGRP_DCC3_SR003_ASN_65242
+   address-family ipv4 unicast
+    as-override
+    site-of-origin 65242:101100911
+   !
+  !
+ !
+ vrf VPN0097
+  rd 48702:1011010097
+  address-family ipv4 unicast
+   additional-paths selection route-policy RPL_PIC
+   redistribute connected metric 100 route-policy RPL_REDIS_CONN_TO_BGP
+   redistribute static route-policy RPL_REDIS_STATIC_TO_BGP_PRIM_PE
+  !
+ !
+ vrf VPN0101
+  rd 48702:1011010101
+  default-information originate
+  address-family ipv4 unicast
+   additional-paths selection route-policy RPL_PIC
+   redistribute connected metric 100 route-policy RPL_REDIS_CONN_TO_BGP
+   redistribute static route-policy RPL_REDIS_STATIC_TO_BGP_VPN0101
+  !
+  neighbor 10.50.1.35
+   use neighbor-group NBGRP_DCC2_SR003_ASN_65242
+   address-family ipv4 unicast
+    route-policy RPL_VPN0101_SR003_PRIM_PE_IN in
+    as-override
+    site-of-origin 65242:101101011
+   !
+  !
+  neighbor 10.50.1.36
+   use neighbor-group NBGRP_DCC3_SR003_ASN_65242
+   address-family ipv4 unicast
+    route-policy RPL_VPN0101_SR003_SECO_PE_IN in
+    as-override
+    site-of-origin 65242:101101011
+   !
+  !
+ !
+ vrf VPN0102
+  rd 48702:1011010102
+  default-information originate
+  address-family ipv4 unicast
+   additional-paths selection route-policy RPL_PIC
+   redistribute connected metric 100 route-policy RPL_REDIS_CONN_TO_BGP
+   redistribute static route-policy RPL_REDIS_STATIC_TO_BGP_VPN0102
+  !
+  neighbor 10.50.50.251
+   use neighbor-group NBGRP_DCC2_SR003_ASN_65242
+   address-family ipv4 unicast
+    as-override
+    site-of-origin 65242:101101021
+   !
+  !
+  neighbor 10.50.50.252
+   use neighbor-group NBGRP_DCC3_SR003_ASN_65242
+   address-family ipv4 unicast
+    as-override
+    site-of-origin 65242:101101021
+   !
+  !
+  neighbor 171.26.244.70
+   remote-as 65239
+   local-as 65234 no-prepend replace-as
+   password encrypted 0462090E2D26586F0D20173B46
+   description VPN0102 - DualRAS_ASN:65239_localas:65234
+   graceful-restart restart-time 120
+   graceful-restart stalepath-time 360
+   graceful-restart
+   address-family ipv4 unicast
+    send-community-ebgp
+    route-policy RPL_PRIM_PE_IN in
+    route-policy RPL_PRIM_DEF_ONLY_OUT out
+    default-originate
+   !
+  !
+ !
+ vrf VPN0104
+  rd 48702:1011010104
+  address-family ipv4 unicast
+   additional-paths selection route-policy RPL_PIC
+   redistribute connected metric 100 route-policy RPL_REDIS_CONN_TO_BGP
+   redistribute static route-policy RPL_REDIS_STATIC_TO_BGP_PRIM_PE
+  !
+ !
+ vrf VPN0105
+  rd 48702:1011010105
+  address-family ipv4 unicast
+   additional-paths selection route-policy RPL_PIC
+   redistribute connected metric 100 route-policy RPL_REDIS_CONN_TO_BGP
+  !
+  neighbor 10.50.17.35
+   use neighbor-group NBGRP_DCC2_SR003_ASN_65242
+   address-family ipv4 unicast
+    as-override
+    site-of-origin 65242:101101051
+   !
+  !
+  neighbor 10.50.17.36
+   use neighbor-group NBGRP_DCC3_SR003_ASN_65242
+   address-family ipv4 unicast
+    as-override
+    site-of-origin 65242:101101051
+   !
+  !
+ !
+ vrf VPN0107
+  rd 48702:1011010107
+  address-family ipv4 unicast
+   additional-paths selection route-policy RPL_PIC
+   redistribute connected metric 100 route-policy RPL_REDIS_CONN_TO_BGP
+  !
+  neighbor 10.50.25.35
+   use neighbor-group NBGRP_DCC2_SR003_ASN_65242
+   address-family ipv4 unicast
+    as-override
+    site-of-origin 65242:101101071
+   !
+  !
+  neighbor 10.50.25.36
+   use neighbor-group NBGRP_DCC3_SR003_ASN_65242
+   address-family ipv4 unicast
+    as-override
+    site-of-origin 65242:101101071
+   !
+  !
+ !
+ vrf VPN0108
+  rd 48702:1011010108
+  address-family ipv4 unicast
+   additional-paths selection route-policy RPL_PIC
+   redistribute connected metric 100 route-policy RPL_REDIS_CONN_TO_BGP
+  !
+  neighbor 10.50.29.35
+   use neighbor-group NBGRP_DCC2_SR003_ASN_65242
+   address-family ipv4 unicast
+    as-override
+    site-of-origin 65242:101101081
+   !
+  !
+  neighbor 10.50.29.36
+   use neighbor-group NBGRP_DCC3_SR003_ASN_65242
+   address-family ipv4 unicast
+    as-override
+    site-of-origin 65242:101101081
+   !
+  !
+ !
+ vrf VPN0113
+  rd 48702:1011010113
+  address-family ipv4 unicast
+   additional-paths selection route-policy RPL_PIC
+   redistribute connected metric 100 route-policy RPL_REDIS_CONN_TO_BGP
+   redistribute static route-policy RPL_REDIS_STATIC_TO_BGP_PRIM_PE
+  !
+  neighbor 10.50.49.35
+   use neighbor-group NBGRP_DCC2_SR003_ASN_65242
+   address-family ipv4 unicast
+    as-override
+    site-of-origin 65242:101101131
+   !
+  !
+  neighbor 10.50.49.36
+   use neighbor-group NBGRP_DCC3_SR003_ASN_65242
+   address-family ipv4 unicast
+    as-override
+    site-of-origin 65242:101101131
+   !
+  !
+ !
+ vrf VPN0116
+  rd 48702:1011010116
+  address-family ipv4 unicast
+   additional-paths selection route-policy RPL_PIC
+   redistribute connected metric 100 route-policy RPL_REDIS_CONN_TO_BGP
+   redistribute static route-policy RPL_REDIS_STATIC_TO_BGP_PRIM_PE
+  !
+  neighbor 10.50.61.35
+   use neighbor-group NBGRP_DCC2_SR003_ASN_65242
+   address-family ipv4 unicast
+    as-override
+    site-of-origin 65242:101101161
+   !
+  !
+  neighbor 10.50.61.36
+   use neighbor-group NBGRP_DCC3_SR003_ASN_65242
+   address-family ipv4 unicast
+    as-override
+    site-of-origin 65242:101101161
+   !
+  !
+ !
+ vrf VPN0130
+  rd 48702:1011010130
+  address-family ipv4 unicast
+   additional-paths selection route-policy RPL_PIC
+   redistribute connected metric 100 route-policy RPL_REDIS_CONN_TO_BGP
+   redistribute static route-policy RPL_REDIS_STATIC_TO_BGP_PRIM_PE
+  !
+ !
+ vrf VPN0135
+  rd 48702:1011010135
+  default-information originate
+  address-family ipv4 unicast
+   additional-paths selection route-policy RPL_PIC
+   redistribute connected metric 100 route-policy RPL_REDIS_CONN_TO_BGP
+   redistribute static route-policy RPL_REDIS_STATIC_TO_BGP_PRIM_PE
+  !
+ !
+ vrf VPN0148
+  rd 48702:1011010148
+  address-family ipv4 unicast
+   additional-paths selection route-policy RPL_PIC
+  !
+  neighbor 10.50.189.116
+   remote-as 65515
+   use neighbor-group NBGRP_AIM_DCC_PRIM_PE
+   description VPN0148 - DCC-AIM-VS-GUEST
+   address-family ipv4 unicast
+   !
+  !
+ !
+ vrf VPN0151
+  rd 48702:1011010151
+  address-family ipv4 unicast
+   additional-paths selection route-policy RPL_PIC
+   redistribute connected metric 100 route-policy RPL_REDIS_CONN_TO_BGP
+  !
+  neighbor 10.50.192.3
+   use neighbor-group NBGRP_DCC2_SR003_ASN_65242
+   address-family ipv4 unicast
+    as-override
+    site-of-origin 65242:101101511
+   !
+  !
+  neighbor 10.50.192.4
+   use neighbor-group NBGRP_DCC3_SR003_ASN_65242
+   address-family ipv4 unicast
+    as-override
+    site-of-origin 65242:101101511
+   !
+  !
+ !
+ vrf VPN0152
+  rd 48702:1011010152
+  address-family ipv4 unicast
+   advertise best-external
+   redistribute connected metric 100 route-policy RPL_REDIS_CONN_TO_BGP
+  !
+  neighbor 10.50.198.11
+   use neighbor-group NBGRP_DCC2_SR003_ASN_65242
+   address-family ipv4 unicast
+    as-override
+    site-of-origin 65242:101101521
+   !
+  !
+  neighbor 10.50.198.12
+   use neighbor-group NBGRP_DCC3_SR003_ASN_65242
+   address-family ipv4 unicast
+    as-override
+    site-of-origin 65242:101101521
+   !
+  !
+ !
+ vrf VPN0153
+  rd 48702:1011010153
+  default-information originate
+  address-family ipv4 unicast
+   additional-paths selection route-policy RPL_PIC
+   redistribute connected metric 100 route-policy RPL_REDIS_CONN_TO_BGP
+   redistribute static route-policy RPL_REDIS_STATIC_TO_BGP_PRIM_PE
+  !
+ !
+ vrf VPN0199
+  rd 48702:1011010199
+  address-family ipv4 unicast
+   additional-paths selection route-policy RPL_PIC
+   redistribute connected metric 100 route-policy RPL_REDIS_CONN_TO_BGP
+  !
+  neighbor 10.50.42.67
+   use neighbor-group NBGRP_DCC2_SR003_ASN_65242
+   address-family ipv4 unicast
+    as-override
+    site-of-origin 65242:101101991
+   !
+  !
+  neighbor 10.50.42.68
+   use neighbor-group NBGRP_DCC3_SR003_ASN_65242
+   address-family ipv4 unicast
+    as-override
+    site-of-origin 65242:101101991
+   !
+  !
+ !
+ vrf VPN0206
+  rd 48702:1011010206
+  address-family ipv4 unicast
+   additional-paths selection route-policy RPL_PIC
+   redistribute connected metric 10 route-policy RPL_REDIS_CONN_TO_BGP_VPN0206
+   redistribute static route-policy RPL_REDIS_STATIC_TO_BGP_VPN0206
+  !
+  neighbor 10.51.21.76
+   use neighbor-group NBGRP_DCC_IAF_ASN_64680_PRIM_PE
+   local-as 65531 no-prepend replace-as
+   description VPN0207 - DCC_IAF_IT2
+   address-family ipv4 unicast
+   !
+  !
+ !
+ vrf VPN0207
+  rd 48702:1011010207
+  address-family ipv4 unicast
+   additional-paths selection route-policy RPL_PIC
+   redistribute connected metric 10 route-policy RPL_REDIS_CONN_TO_BGP_VPN0207
+  !
+  neighbor 10.51.25.68
+   use neighbor-group NBGRP_DCC_IAF_ASN_64680_PRIM_PE
+   local-as 65532 no-prepend replace-as
+   description VPN0207_IAF_DCB_ AS:64680
+   address-family ipv4 unicast
+   !
+  !
+ !
+ vrf VPN0208
+  rd 48702:1011010208
+  address-family ipv4 unicast
+   additional-paths selection route-policy RPL_PIC
+   redistribute connected metric 10 route-policy RPL_REDIS_CONN_TO_BGP_VPN0208
+  !
+  neighbor 10.51.29.68
+   use neighbor-group NBGRP_DCC_IAF_ASN_64680_PRIM_PE
+   local-as 65533 no-prepend replace-as
+   description VPN0208 - DCC_IAF_IT2
+   address-family ipv4 unicast
+   !
+  !
+ !
+ vrf VPN0209
+  rd 48702:1011010209
+  address-family ipv4 unicast
+   additional-paths selection route-policy RPL_PIC
+   redistribute connected metric 10 route-policy RPL_REDIS_CONN_TO_BGP_VPN0209
+  !
+  neighbor 10.51.33.68
+   use neighbor-group NBGRP_DCC_IAF_ASN_64680_PRIM_PE
+   local-as 65534 no-prepend replace-as
+   description VPN0209 - DCC_IAF_IT2
+   address-family ipv4 unicast
+   !
+  !
+ !
+ vrf VPN0211
+  rd 48702:1011010211
+  address-family ipv4 unicast
+   additional-paths selection route-policy RPL_PIC
+   redistribute connected metric 10 route-policy RPL_REDIS_CONN_TO_BGP_VPN0211
+  !
+  neighbor 10.51.41.68
+   use neighbor-group NBGRP_DCC_IAF_ASN_64680_PRIM_PE
+   local-as 65526 no-prepend replace-as
+   description VPN0211 - DCC_IAF_IT2
+   address-family ipv4 unicast
+   !
+  !
+ !
+ vrf VPN1000
+  rd 48702:1011011000
+  address-family ipv4 unicast
+   additional-paths selection route-policy RPL_PIC
+   redistribute connected metric 100 route-policy RPL_REDIS_CONN_TO_BGP
+  !
+  neighbor 10.51.128.11
+   use neighbor-group NBGRP_DCC2_SR003_ASN_65242
+   address-family ipv4 unicast
+    route-policy RPL_VPN1000_SR003_PRIM_PE_IN in
+    as-override
+    site-of-origin 65242:101110001
+   !
+  !
+  neighbor 10.51.128.12
+   use neighbor-group NBGRP_DCC3_SR003_ASN_65242
+   address-family ipv4 unicast
+    route-policy RPL_VPN1000_SR003_SECO_PE_IN in
+    as-override
+    site-of-origin 65242:101110001
+   !
+  !
+ !
+ vrf VPN1001
+  rd 48702:1011011001
+  address-family ipv4 unicast
+   additional-paths selection route-policy RPL_PIC
+   redistribute connected metric 100 route-policy RPL_REDIS_CONN_TO_BGP
+  !
+  neighbor 10.51.133.44
+   use neighbor-group NBGRP_DCC_IAF_ASN_64680_PRIM_PE
+   local-as 65535 no-prepend replace-as
+   description VPN1001 - DCC_IAF_IT2
+   address-family ipv4 unicast
+   !
+  !
+  neighbor 10.51.133.68
+   remote-as 65505
+   use neighbor-group NBGRP_AIM_DCC_PRIM_PE
+   local-as 65535 no-prepend replace-as
+   description VPN1001 - DCC-AIM-VS-ON
+   address-family ipv4 unicast
+    route-policy RPL_VPN1001_to_AIM_ON_PRIM_PE_OUT out
+   !
+  !
+  neighbor 10.52.208.62
+   remote-as 65507
+   use neighbor-group NBGRP_AIM_DCC_PRIM_PE
+   local-as 65535 no-prepend replace-as
+   description VPN1001 - DCC-AIM-VS-EBL
+   address-family ipv4 unicast
+    route-policy RPL_VPN1001_TO_AIM_OUT out
+   !
+  !
+  neighbor 10.52.211.251
+   use neighbor-group NBGRP_DCC2_SR003_ASN_65242
+   address-family ipv4 unicast
+    as-override
+    site-of-origin 65242:101110011
+   !
+  !
+  neighbor 10.52.211.252
+   use neighbor-group NBGRP_DCC3_SR003_ASN_65242
+   address-family ipv4 unicast
+    as-override
+    site-of-origin 65242:101110011
+   !
+  !
+ !
+ vrf VPN1101
+  rd 48702:1011111101
+  address-family ipv4 unicast
+   additional-paths selection route-policy RPL_PIC
+   redistribute connected metric 100 route-policy RPL_REDIS_CONN_TO_BGP
+  !
+  neighbor 10.64.155.107
+   use neighbor-group NBGRP_DCC2_SR003_ASN_65242
+   address-family ipv4 unicast
+    route-policy RPL_VPN1101_SR003_PRIM_PE_IN in
+    as-override
+    site-of-origin 65242:101111011
+   !
+  !
+  neighbor 10.64.155.108
+   use neighbor-group NBGRP_DCC3_SR003_ASN_65242
+   address-family ipv4 unicast
+    route-policy RPL_VPN1101_SR003_SECO_PE_IN in
+    as-override
+    site-of-origin 65242:101111011
+   !
+  !
+ !
+ vrf VPN1114
+  rd 48702:1011011114
+  address-family ipv4 unicast
+   additional-paths selection route-policy RPL_PIC
+   redistribute connected metric 100 route-policy RPL_REDIS_CONN_TO_BGP
+  !
+  neighbor 10.91.7.115
+   use neighbor-group NBGRP_DCC2_SR003_ASN_65242
+   address-family ipv4 unicast
+    as-override
+    site-of-origin 65242:101111141
+   !
+  !
+  neighbor 10.91.7.116
+   use neighbor-group NBGRP_DCC3_SR003_ASN_65242
+   address-family ipv4 unicast
+    as-override
+    site-of-origin 65242:101111141
+   !
+  !
+ !
+ vrf temp_test
+  rd 48702:1011013101
+  default-information originate
+  address-family ipv4 unicast
+   additional-paths selection route-policy RPL_PIC
+   redistribute connected metric 100 route-policy RPL_REDIS_CONN_TO_BGP
+   redistribute static
+  !
+  neighbor 10.52.211.243
+   use neighbor-group NBGRP_DCC2_SR003_ASN_65242
+   address-family ipv4 unicast
+    route-policy RPL_PRIM_PE_IN_temp_test in
+    as-override
+    site-of-origin 65242:101131011
+   !
+  !
+  neighbor 10.52.211.244
+   use neighbor-group NBGRP_DCC3_SR003_ASN_65242
+   address-family ipv4 unicast
+    as-override
+    site-of-origin 65242:101131011
+   !
+  !
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps ima
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps hsrp
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps vrrp events
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps vpls all
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps vpls status
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps vpls full-clear
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps vpls full-raise
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps l2vpn all
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps l2vpn vc-up
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps l2vpn vc-down
+
+None
+matche pas:
+l
+None
+matche pas:
+2vpn
+ xconnect group XGP_PE100306
+  p2p pe100306_Gig0_3_GEN_HOUSED_RACK
+   interface GigabitEthernet0/0/0/1
+   neighbor ipv4 172.21.2.130 pw-id 11113601
+   !
+  !
+ !
+ xconnect group XGP_PE100308
+  p2p pe100308_Gig0_17_Succursale
+   interface GigabitEthernet0/0/0/0
+   neighbor ipv4 172.21.0.100 pw-id 11113801
+   !
+  !
+ !
+ xconnect group XGP_PE101301
+  p2p GSBEBR1-PE101301-SAT100IF38
+   interface Bundle-Ether10.1131
+   neighbor ipv4 172.21.0.103 pw-id 11132201
+   !
+   description "A:PE101101_BE10_1131 <X/11132201> B:PE101301_gig100/0/0/0/38"
+  !
+ !
+ xconnect group XGP_PE101301_89
+  p2p GSBEBR1-PE101301-SAT101IF3VLAN89
+   interface Bundle-Ether10.89
+   neighbor ipv4 172.21.0.103 pw-id 11132202
+   !
+   description "A:PE101101_BE10_89 <X/11132202> B:PE101301_gig100/0/0/0/3.89"
+  !
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+r
+None
+matche pas:
+outer hsrp
+ interface Bundle-Ether11.502
+  address-family ipv4
+   hsrp 502
+    timers msec 400 msec 1200
+    preempt delay 180
+    priority 120
+    address 10.50.5.113
+   !
+  !
+ !
+ interface Bundle-Ether11.504
+  address-family ipv4
+   hsrp 504
+    timers msec 400 msec 1200
+    preempt delay 180
+    priority 120
+    address 10.50.13.113
+   !
+  !
+ !
+ interface Bundle-Ether11.513
+  address-family ipv4
+   hsrp 513
+    timers msec 400 msec 1200
+    preempt delay 180
+    priority 120
+    address 10.50.49.113
+   !
+  !
+ !
+ interface Bundle-Ether11.516
+  address-family ipv4
+   hsrp 516
+    timers msec 400 msec 1200
+    preempt delay 180
+    priority 120
+    address 10.50.61.113
+   !
+  !
+ !
+ interface Bundle-Ether11.530
+  address-family ipv4
+   hsrp 309
+    timers msec 400 msec 1200
+    preempt delay 180
+    priority 120
+    address 10.90.119.129
+   !
+  !
+ !
+ interface Bundle-Ether11.553
+  address-family ipv4
+   hsrp 553
+    timers msec 400 msec 1200
+    preempt delay 180
+    priority 120
+    address 10.50.200.17
+   !
+  !
+ !
+ interface Bundle-Ether11.1012
+  address-family ipv4
+   hsrp 1012
+    timers msec 400 msec 1200
+    preempt delay 180
+    priority 120
+    address 10.50.1.113
+   !
+  !
+ !
+ interface Bundle-Ether11.1013
+  address-family ipv4
+   hsrp 1013
+    timers msec 400 msec 1200
+    preempt delay 180
+    priority 120
+    address 10.50.1.97
+   !
+  !
+ !
+ interface Bundle-Ether11.1910
+  address-family ipv4
+   hsrp 1910
+    timers msec 400 msec 1200
+    preempt delay 180
+    priority 120
+    address 10.91.97.49
+   !
+  !
+ !
+ interface Bundle-Ether11.1956
+  address-family ipv4
+   hsrp 1956
+    timers msec 400 msec 1200
+    preempt delay 180
+    priority 120
+    address 10.51.21.49
+   !
+  !
+ !
+ interface Bundle-Ether11.1970
+  address-family ipv4
+   hsrp 1970
+    timers msec 400 msec 1200
+    preempt delay 180
+    priority 120
+    address 172.24.37.25
+   !
+  !
+ !
+ interface GigabitEthernet0/0/0/2.26
+  address-family ipv4
+   hsrp 26
+    timers msec 400 msec 1200
+    preempt delay 180
+    priority 120
+    address 10.69.254.100
+   !
+  !
+ !
+ interface GigabitEthernet0/0/0/2.110
+  address-family ipv4
+   hsrp 110
+    timers msec 400 msec 1200
+    preempt delay 180
+    priority 120
+    address 192.168.39.17
+   !
+  !
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+m
+None
+matche pas:
+pls oam
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps mpls traffic-eng up
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps mpls traffic-eng down
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps mpls traffic-eng reroute
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps mpls traffic-eng reoptimize
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps mpls frr all
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps mpls frr protected
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps mpls frr unprotected
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps mpls ldp up
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps mpls ldp down
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps mpls ldp threshold
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps mpls traffic-eng p2mp up
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps mpls traffic-eng p2mp down
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps rsvp all
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps rsvp new-flow
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps rsvp lost-flow
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps mpls l3vpn all
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps mpls l3vpn vrf-up
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps mpls l3vpn vrf-down
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps mpls l3vpn max-threshold-cleared
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps mpls l3vpn max-threshold-exceeded
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps mpls l3vpn mid-threshold-exceeded
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps mpls l3vpn max-threshold-reissue-notif-time 1
+
+None
+matche pas:
+m
+None
+matche pas:
+pls ldp
+ igp sync delay on-proc-restart 60
+ igp sync delay on-session-up 5
+ ! will send packets with priority cs6 on the network (default)
+ signalling dscp 48
+ router-id 172.21.0.105
+ neighbor
+  password encrypted 15453920547F7E0A2B05213A24
+ !
+ session protection
+ address-family ipv4
+  discovery targeted-hello accept from ACL4_GRT_MPLS_PEERS
+  label
+   local
+    allocate for host-routes
+    advertise
+     explicit-null
+    !
+   !
+  !
+ !
+ interface TenGigE0/0/1/0
+ !
+ interface TenGigE0/0/1/1
+ !
+ interface TenGigE0/0/2/0
+ !
+
+None
+matche pas:
+!
+None
+matche pas:
+
+
+None
+matche pas:
+m
+None
+matche pas:
+pls ip-ttl-propagate disable forwarded
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps ipsec tunnel stop
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps ipsec tunnel start
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps isakmp tunnel stop
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps isakmp tunnel start
+
+None
+matche pas:
+s
+None
+matche pas:
+sh server v2
+
+None
+matche pas:
+s
+None
+matche pas:
+sh server vrf MGMT
+
+None
+matche pas:
+s
+None
+matche pas:
+nmp-server traps fru-ctrl
+
+None
+matche pas:
+e
+None
+matche pas:
+nd
+
+
+None
+matche pas:
+R
+None
+matche pas:
+P/0/RSP0/CPU0:GSBEDCC2-PE101101#
+None
+
+END:GSBEDCC2-PE101101
+

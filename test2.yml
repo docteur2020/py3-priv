@@ -1,0 +1,16 @@
+---
+- hosts: ios
+  gather_facts: false
+  connection: local
+  
+  tasks:
+   - name: run show version on ios device
+     ios_command:
+       host: "10.91.109.24"
+       username: "vv5347"
+       password: "Oclo2hvr!"
+       commands:
+          - show version
+     register: version
+       
+   - debug: msg={{version.stdout_lines[0][15]}}

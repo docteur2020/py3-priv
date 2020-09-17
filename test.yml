@@ -1,0 +1,14 @@
+---
+- hosts: ios
+  connection: local
+  gather_facts: False
+
+  tasks:
+    - ntc_show_command:
+       host: "10.91.109.24"
+       username: "vv5347"
+       password: "Oclo2hvr!"
+       connection: ssh
+       template_dir: '/home/vv5347/ENG/ansible-library/ntc-ansible/ntc-templates/ntc_templates'
+       platform: 
+       command: 'show vlan'
