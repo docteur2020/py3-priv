@@ -1,0 +1,78 @@
+! {{hostname}}
+
+interface Ethernet1/46
+   description l3 back-2-back
+   channel-group 2 mode active
+   no shut
+
+interface Ethernet1/47
+   description l3 back-2-back
+   channel-group 2 mode active
+   no shut
+   
+interface po2
+ description Po l3 back-2-back
+ no switchport
+ mtu 9150
+ 
+interface eth1/51
+ description To ACI leaf
+ no switchport
+ mtu 9150
+ no shut
+ 
+interface po2.100
+ ip pim sparse-mode 
+ 
+{% for vrf in vrfs -%}
+
+Vrf context {{vrf}}
+
+interface po2.{{vrfinfo[vrf].id}}
+ mtu 9150
+ description Po l3 back-2-back vrf {{vrf}}
+ encapsulation dot1q {{vrfinfo[vrf].id}}
+ vrf member {{vrf}}
+ ip address {{vrfs[vrf]['b2b']}}/31
+ no shut
+ no ip pim sparse-mode
+ ip router ospf IPN area 0.0.0.0
+ no ip ospf passive-interface
+ ip ospf network point-to-point 
+
+ 
+interface loopback{{vrfinfo[vrf].id}}
+  vrf member {{vrf}}
+  ip address  {{vrfs[vrf]['loopback']}}/32
+  ip router ospf IPN area 0.0.0.0
+  no shut
+
+ router ospf IPN
+  vrf {{vrf}}
+    router-id {{vrfs[vrf]['loopback']}}
+    log-adjacency-changes
+    passive-interface default
+	
+{% if vrfs[vrf]['bes2'] %}
+interface Ethernet1/48.{{hostname|getTagBes(vrf)}}
+  description Interco_BES2-{{hostname|getIdBes}}_{{vrf}}
+  mtu 9150
+  encapsulation dot1q {{hostname|getTagBes(vrf)}}
+  vrf member {{vrf}}
+  ip address {{vrfs[vrf]['bes2']}}
+  no ip ospf passive-interface
+  ip router ospf IPN area 0.0.0.0
+  no shutdown
+ {% endif %}
+ 
+interface Ethernet1/51.{{vrfinfo[vrf].id}}
+  description Interco_ACI_{{vrf}}
+  mtu 9150
+  encapsulation dot1q {{vrfinfo[vrf].id}}
+  vrf member {{vrf}}
+  ip address {{vrfs[vrf].aci}}
+  no ip ospf passive-interface
+  ip router ospf IPN area 0.0.0.{{hostname|pod}}
+  no shutdown
+  
+{% endfor %}
