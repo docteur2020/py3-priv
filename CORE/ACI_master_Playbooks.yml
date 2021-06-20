@@ -1,0 +1,1056 @@
+---
+- name: Playbook for All ACI
+  hosts: all
+  connection: local
+  gather_facts: no
+  
+  
+  vars:
+    
+    snapshot_tag: "{{ tag_change }}"
+    ansible_host: "10.10.20.14"
+    username: "admin"
+    password: "C1sco12345"
+
+  tasks:
+    
+# ============================================================================================================================================================
+# Take a snaphot of current configuration
+# ============================================================================================================================================================
+
+    - name: PRE-SNAPSHOT 
+      aci_rest:
+        validate_certs: no
+        use_proxy: no
+        hostname: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        method: post
+        path: /api/mo/uni.json
+        content: |
+         {"configExportP":{"attributes":{"dn":"uni/fabric/configexp-PRE-{{ snapshot_tag }}",
+         "name":"PRE-{{ snapshot_tag }}","snapshot":"true","adminSt":"triggered","descr":"{{ tag_change }}"}}}
+      tags: snapshot
+
+
+    - name: wait
+      wait_for: timeout=3
+ 
+ 
+# ============================================================================================================================================================
+# import data form excel file
+#
+# ============================================================================================================================================================
+
+
+    - name: import data form excel file
+      xlsx_to_fact:
+        src: "{{ excel_file }}"
+      register: datas_raw
+      tags: always
+         
+    - name: Set data
+      set_fact:
+        datas: "{{ datas_raw.meta.results }}"
+      tags: always
+
+    - name: print datas
+      debug:
+        msg: "{{ datas }}"
+      tags: test     
+ 
+# ============================================================================================================================================================
+#  Fabric Policy
+#  Interface policy
+# ============================================================================================================================================================
+
+#link level
+
+    - name: Add a Link Level Policy
+      cisco.aci.aci_interface_policy_link_level:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        link_level_policy: "{{ item.llpname }}"
+        description: "{{ item.description }}"
+        auto_negotiation: "{{ item.negociation }}"
+        speed: "{{ item.speed }}"
+        link_debounce_interval: 100
+        forwarding_error_correction: cl91-rs-fec
+        state: present
+        validate_certs: no
+      delegate_to: localhost
+      loop: '{{ datas.link_level_pols }}'
+      loop_control:
+        pause: 1
+      tags: linklevel,intpol,restore
+ 
+#cdp
+ 
+    - name: Add CDP Interface Policy
+      cisco.aci.aci_interface_policy_cdp:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        name: "{{ item.cpname }}"
+        admin_state: "{{ item.state }}"
+        state: present
+        validate_certs: no
+      delegate_to: localhost
+      loop: '{{ datas.cdp_pols }}'
+      loop_control:
+        pause: 1
+      tags: cdppol,intpol,restore
+
+
+#lldp
+
+    - name: Add a LLDP interface policy
+      cisco.aci.aci_interface_policy_lldp:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        lldp_policy: '{{ item.lpname }}'
+        description: '{{ item.description }}'
+        receive_state: '{{ item.receive_state }}'
+        transmit_state: '{{ item.transmit_state }}'
+        validate_certs: no
+      delegate_to: localhost
+      loop: '{{ datas.lldp_pols }}'
+      loop_control:
+        pause: 1
+      tags: lldppol,intpol,restore
+
+
+#port-channel
+
+    - name: Add a port channel interface policy
+      cisco.aci.aci_interface_policy_port_channel:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        port_channel: '{{ item.ppname }}'
+        description: '{{ item.description }}'
+        suspend_individual: '{{ item.suspend_individual}}'
+        mode: '{{ item.mode }}'
+        validate_certs: no
+      delegate_to: localhost
+      loop: '{{ datas.portchannel_pols }}'
+      loop_control:
+        pause: 1
+      tags: pcpol,intpol,restore
+  
+#mcp
+
+    - name: Add a MCP interface policy
+      cisco.aci.aci_interface_policy_mcp:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        mcp: '{{ item.mpname }}'
+        description: '{{ item.description }}'
+        admin_state: '{{ item.state }}'
+        validate_certs: no
+      delegate_to: localhost
+      loop: '{{ datas.mcp_pols }}'
+      loop_control:
+        pause: 1
+      tags: mcppol,intpol,restore 
+ 
+ #storm control
+ 
+    - name: Add Storm Control Policies via REST
+      aci_rest:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        validate_certs: no
+        path: /api/mo/uni.xml
+        method: post
+        content: |
+          <stormctrlIfPol burstRate="{{ item.burst }}" descr="{{ item.description }}" dn="uni/infra/stormctrlifp-{{ item.scname }}" name="{{ item.scname }}" nameAlias="" ownerKey="" ownerTag="" rate="{{ item.rate }}" />
+      loop: '{{ datas.stormcontrol_pols }}'
+      loop_control:
+        pause: 1
+      tags: scpol,intpol,restore 
+ 
+# spanning-tree policy
+
+    - name: Add Spanning Tree Policies via REST
+      aci_rest:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        validate_certs: no
+        path: /api/mo/uni.xml
+        method: post
+        content: |
+         <stpIfPol annotation="" ctrl="{{ item.ctrl }}" descr="" dn="uni/infra/ifPol-{{ item.name }}" name="{{ item.name }}" nameAlias="" ownerKey="" ownerTag=""/>
+      loop: '{{ datas.stp_pols }}'
+      loop_control:
+        pause: 1
+      tags: stppol,intpol,restore 
+
+# ============================================================================================================================================================
+# Add VLAN pool and Pysical domain policy
+#
+# ============================================================================================================================================================
+
+
+    - name: Add a new VLAN pool
+      aci_vlan_pool:
+        validate_certs: no
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        pool: "{{ item.poolname }}"
+        pool_allocation_mode: "{{ item.alloc }}"
+        description: "{{ item.description }}"
+        state: present
+      delegate_to: localhost
+      loop: '{{ datas.vlan_pools }}'
+      loop_control:
+        pause: 1
+      tags: vlandom,restore
+
+
+    - name: Add a new VLAN encap block
+      aci_vlan_pool_encap_block:
+        validate_certs: no
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        pool: "{{ item.poolname }}"
+        allocation_mode: "{{ item.allocmode }}" 
+        pool_allocation_mode: "{{ item.alloc }}"
+        block_start: "{{ item.start }}"
+        block_end: "{{ item.end }}"
+        block_name: "{{ item.blockname }}"
+        state: present
+      delegate_to: localhost
+      loop: '{{ datas.vlan_blocks}}'
+      loop_control:
+        pause: 1
+      tags: vlandom,restore
+
+
+# physical domain creation
+    - name: Add a new physical domain
+      aci_domain:
+        validate_certs: no
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        domain: "{{ item.domname }}"
+        domain_type: "{{ item.type }}"
+        state: present
+      delegate_to: localhost
+      when: ("{{ item.type }}" != "vmm")    
+      loop: '{{ datas.domains }}'  
+      loop_control:
+        pause: 1
+      tags: domain,restore
+
+
+#Bind Vlan to physical domain ======ONLY FOR PHYSICAL DOMAIN or L3DOMAIN=========
+
+    - name: Bind a physical domain to VLAN pool
+      aci_domain_to_vlan_pool:
+        validate_certs: no
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        domain: "{{ item.domname }}"
+        domain_type: "{{ item.type }}"
+        pool: "{{ item.poolname }}"
+        pool_allocation_mode: "{{ item.allocmode }}"
+        state: present
+      delegate_to: localhost
+      when: ("{{ item.type }}" != "vmm")    
+      loop: '{{ datas.bind_domains_vp }}'  
+      loop_control:
+        pause: 1
+      tags: domain,restore
+
+## ============================================================================================================================================================
+## AAEP provisionnibg
+## Add AAEP
+## ============================================================================================================================================================
+#
+#    - name: import aep csv
+#      csv_to_facts:
+#        src: '{{ playbook_dir }}/csv/aep.csv'
+#      tags: aep,restore 
+#
+#Add AEP and bind it to physical domain
+
+    - name: Add AEP to physical via REST
+      aci_rest:
+        hostname: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        validate_certs: no
+        path: /api/mo/uni.json
+        method: post
+        content: |
+         {"infraAttEntityP": {"attributes": {"descr": "{{ item.description }}","dn": "uni/infra/attentp-{{ item.name }}","name": "{{ item.name }}",},
+             "children": [{"infraRsDomP": {"attributes": {"tDn": "uni/phys-{{ item.domain }}"}}}]}}    
+      delegate_to: localhost
+      when: ("{{ item.type }}" == "phys")
+      loop: '{{ datas.aaeps }}'
+      loop_control:
+        pause: 1
+      tags: aep,restore 
+
+      
+# ============================================================================================================================================================
+# Add port/leaf policy
+#
+# ============================================================================================================================================================
+ 
+ # leaf access ipg
+    - name: Add a Leaf Access Port Policy Group
+      cisco.aci.aci_interface_policy_leaf_policy_group:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        lag_type: leaf
+        policy_group: '{{ item.ipgname }}'
+        description: '{{ item.description }}'
+        link_level_policy: '{{ item.link_level_pol }}'
+        cdp_policy: '{{ item.cdp_pol }}'
+        lldp_policy: '{{ item.lldp_pol }}'
+        mcp_policy: '{{ item.mcp_pol }}'
+        storm_control_interface_policy: '{{ item.storm_control_pol }}'
+        stp_interface_policy: '{{item.stp_pol }}'
+        state: present
+        validate_certs: no
+      delegate_to: localhost
+      loop: '{{ datas.ipgs }}'
+      loop_control:
+        pause: 1
+      tags: ipg,restore 
+ 
+
+ # bind aaep to leaf access ipg 
+    - name: bind AAEP to Leaf Access Port Policy Group
+      aci_rest:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        validate_certs: no
+        path: /api/mo/uni.xml
+        method: post
+        validate_certs: no
+        content: |
+          <infraAccPortGrp descr="{{ item.description }}" dn="uni/infra/funcprof/accportgrp-{{ item.ipgname }}" name="{{ item.ipgname }}" nameAlias="" ownerKey="" ownerTag="">
+            <infraRsAttEntP tDn="uni/infra/attentp-{{ item.aaep }}"/>
+          </infraAccPortGrp>
+      with_items: "{{ datas.ipgs }}"
+      tags: ipg,restore
+  
+ # leaf interface profile 
+    - name: Add a new leaf_interface_profile
+      cisco.aci.aci_interface_policy_leaf_profile:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        interface_profile: "INT_PRO_LEAF_{{ item.nodeid }}"
+        description:  "Interface profile for leaf {{ item.nodeid }}"
+        state: present
+        validate_certs: no
+      delegate_to: localhost
+      loop: '{{ datas.leaves_nodes }}'
+      loop_control:
+        pause: 1
+      tags: intpro,restore  
+ 
+  # leaves interface profile for VPC
+    - name: Add a new leaf_interface_profile for pair
+      cisco.aci.aci_interface_policy_leaf_profile:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        interface_profile: "INT_PRO_LEAF_{{ item.nodes | replace('-','_') }}"
+        description:  "Interface profile for leaf {{ item.nodes }}"
+        state: present
+        validate_certs: no
+      delegate_to: localhost
+      loop: '{{ datas.vpc_nodes }}'
+      loop_control:
+        pause: 1
+      tags: intprovpc,vpc_pol,restore
+ 
+
+  # VPC domain
+    - name: Add VPC Doms via REST
+      aci_rest:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        validate_certs: no
+        path: /api/mo/uni.xml
+        method: post
+        content: |
+          <fabricProtPol descr="" dn="uni/fabric/protpol" name="default" nameAlias="" ownerKey="" ownerTag="" pairT="explicit">
+            <fabricExplicitGEp id="{{ nodevpcs[0] }}" name="VPC_DOM_{{ item.nodes | replace('-','_') }}">
+            <fabricRsVpcInstPol tnVpcInstPolName=""/>
+            <fabricNodePEp descr="" id="{{ nodevpcs[0] }}" name="" nameAlias="" podId="{{ item.podid }}"/>
+            <fabricNodePEp descr="" id="{{ nodevpcs[1] }}" name="" nameAlias="" podId="{{ item.podid }}"/>
+          </fabricExplicitGEp>
+          </fabricProtPol>
+      with_items: '{{ datas.vpc_nodes }}'
+      vars:
+        nodevpcs: "{{ item.nodes.split('-') }}"
+      tags: vpc_doms
+   
+  # single switch profile   
+    - name: Add Single Switch Profiles via REST
+      aci_rest:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        validate_certs: no
+        path: /api/mo/uni.xml
+        method: post
+        content: |
+          <infraNodeP descr="" dn="uni/infra/nprof-SW_PRO_LEAF_{{ item.nodeid }}" name="SW_PRO_LEAF_{{ item.nodeid }}" nameAlias="" ownerKey="" ownerTag="">
+            <infraRsAccPortP tDn="uni/infra/accportprof-INT_PRO_LEAF_{{ item.nodeid }}"/>
+            <infraLeafS descr="" name="LEAF_{{ item.nodeid }}" nameAlias="" ownerKey="" ownerTag="" type="range">
+              <infraNodeBlk descr="" from_="{{ item.nodeid }}" name="{{ item.nodeid }}" nameAlias="" to_="{{ item.nodeid }}"/>
+            </infraLeafS>
+          </infraNodeP>
+      with_items: '{{ datas.leaves_nodes }}'
+      tags: swpro,leaves,restore
+ 
+
+  # pair switch profile   
+    - name: Add Pair Switch Profiles via REST
+      aci_rest:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        validate_certs: no
+        path: /api/mo/uni.xml
+        method: post
+        content: |
+          <infraNodeP descr="" dn="uni/infra/nprof-SW_PRO_LEAF_{{ item.nodes | replace('-','_') }}" name="SW_PRO_LEAF_{{ item.nodes | replace('-','_') }}" nameAlias="" ownerKey="" ownerTag="">
+            <infraRsAccPortP tDn="uni/infra/accportprof-INT_PRO_LEAF_{{ item.nodes | replace('-','_') }}"/>
+            <infraLeafS descr="" name="LEAF_{{ item.nodes | replace('-','_') }}" nameAlias="" ownerKey="" ownerTag="" type="range">
+              <infraNodeBlk descr="" from_="{{ nodevpcs[0] }}" name="1" nameAlias="" to_="{{ nodevpcs[0] }}"/>
+              <infraNodeBlk descr="" from_="{{ nodevpcs[1] }}" name="2" nameAlias="" to_="{{ nodevpcs[1]  }}"/>
+            </infraLeafS>
+          </infraNodeP>
+      with_items: "{{ datas.vpc_nodes }}"
+      vars:
+        nodevpcs: "{{ item.nodes.split('-') }}"
+      tags: swpro,leaves,restore
+      
+
+
+
+# ============================================================================================================================================================
+# tenant   & VRF & Application profile Provisioning
+# Add new Tenant
+# ============================================================================================================================================================
+#    - name: import tentant csv
+#      csv_to_facts:
+#        src: '{{ playbook_dir }}/csv/tn-info.csv'
+#      tags: tenant,restore
+#
+    - name: Add a new tenant
+      aci_tenant:
+        validate_certs: "false"
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        tenant: "{{ item.tnname }}"
+        description: "{{ item.tndesc }}"
+        state: present
+      delegate_to: localhost
+      loop: '{{ datas.tenants }}'
+      loop_control:
+        pause: 1
+      tags: tenant,restore
+
+
+
+# VRF  Provisioning
+
+    
+    - name: Add a new VRF to a tenant
+      aci_vrf:
+        validate_certs: "false"
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        vrf: "{{ item.vrfname }}"
+        tenant: "{{ item.tnname }}"
+        descr: "{{ item.vrfname }}"
+        policy_control_preference: enforced
+        policy_control_direction: ingress
+        state: present
+      delegate_to: localhost
+      loop: '{{ datas.vrfs }}'
+      loop_control:
+        pause: 1
+      tags: vrf,restore
+
+
+# APlication  Provisioning
+
+    - name: Add a new AP
+      aci_ap:
+        validate_certs: no
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        tenant: "{{ item.tnname }}"
+        ap: "{{ item.apname }}"
+        description: "{{ item.apname }}"
+        state: present
+      delegate_to: localhost
+      loop: '{{ datas.aps }}'
+      loop_control:
+        pause: 1
+      tags: ap,restore
+
+
+#######NEED REVIEW
+
+# ============================================================================================================================================================
+# BD & EPG Provisioning
+# Add new Tenant
+# ============================================================================================================================================================
+
+
+
+#    - name: import epg csv
+#      csv_to_facts:
+#        src: '{{ playbook_dir }}/csv/epg-info.csv'
+#      tags: epg,restore,epg-dom
+#
+# BD  Provisioning   ##### NEED TO BE REVIEWED ####
+
+    - name: Add Bridge Domain
+      aci_bd:
+        validate_certs: no
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        tenant: "{{ item.tnname }}"
+        vrf: "{{ item.vrfname }}"
+        description : "{{ item.description}}"
+        multi_dest : bd-flood
+        bd: "{{ item.bdname }}"
+        arp_flooding : True
+        l2_unknown_unicast : flood
+        state: present
+      delegate_to: localhost
+      loop: '{{ datas.bds }}'
+      loop_control:
+        pause: 0.3
+      tags: bd,restore
+
+
+# EPG  Provisioning
+
+
+    - name: Add a new EPG
+      aci_epg:
+        validate_certs: no
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        tenant: "{{ item.tnname }}"
+        ap: "{{ item.apname }}"
+        epg: "{{ item.epgname }}"
+        description: "{{ item.description }}"
+        bd: "{{ item.bdname }}"
+        state: present
+      delegate_to: localhost
+      loop: '{{  datas.epgs }}'
+      loop_control:
+        pause: 0.3
+      tags: epg,restore
+# Physical domain to EPG binding
+
+#    - name: Add EPG to physical via REST
+#      aci_rest:
+#        hostname: "{{ ansible_host }}"
+#        username: "{{ username }}"
+#        password: "{{ password }}"
+#        validate_certs: no
+#        path: /api/mo/uni.json
+#        method: post
+#        content: |
+#         {"fvRsDomAtt": {"attributes": {"dn": "uni/tn-{{ item.tnname }}/ap-{{ item.apname }}/epg-{{ item.epgname }}/rsdomAtt-[uni/phys-{{ item.#physdom }}]","tDn": "uni/phys-{{ item.physdom }}"}}}
+#      delegate_to: localhost
+#      loop: '{{ spreadsheet }}'
+#      loop_control:
+#        pause: 1
+#      tags: epg-dom,restore
+
+    - name: Add a new physical domain to EPG binding
+      aci_epg_to_domain:
+        validate_certs: no
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        tenant: "{{ item.tnname }}"
+        ap: "{{ item.apname }}"
+        epg: "{{ item.epgname }}"
+        domain: "{{ item.physdom }}"
+        encap_mode: "vlan"
+        resolution_immediacy: "immediate"
+        domain_type: phys
+        state: present
+      delegate_to: localhost    
+      loop: '{{ datas.dom_to_epg }}'
+      loop_control:
+        pause: 0.3
+      tags: epg_dom,restore
+
+# ============================================================================================================================================================
+# port
+#
+# ============================================================================================================================================================
+    - name: Create a Virtual Port Channel (VPC) Interface Policy Group
+      cisco.aci.aci_interface_policy_leaf_policy_group:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        validate_certs: no
+        lag_type: node
+        policy_group: "{{ item.ipg }}_VPC_{{ item.leaf|replace('-','_') }}_{{ item.port|replace('/','_') }}"
+        link_level_policy: "AUTO_ON"
+        cdp_policy: ""
+        lldp_policy: "LLDP_ON"
+        port_channel_policy: "LACP_ON"
+        state: present
+      delegate_to: localhost
+      with_items: "{{ datas.vpcports }}"
+      tags: vpcport,port,restore
+
+    - name: Add Interface Policy Groups for VPC via REST
+      aci_rest:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        validate_certs: no
+        path: /api/mo/uni.xml
+        method: post
+        content: |
+          <infraAccBndlGrp descr="" dn="uni/infra/funcprof/accbundle-{{ item.ipg }}_VPC_{{ item.leaf|replace('-','_') }}_{{ item.port|replace('/','_') }}" lagT="node" name="{{ item.ipg }}_VPC_{{ item.leaf|replace('-','_') }}_{{ item.port|replace('/','_') }}" nameAlias="" ownerKey="" ownerTag="">
+            <infraRsAttEntP tDn="uni/infra/attentp-AAEP_COMPUTE"/>
+          </infraAccBndlGrp>
+      delegate_to: localhost
+      with_items: "{{ datas.vpcports }}"
+      tags: vpcport,port,restore
+        
+    - name: Set Access Interfaces to Interface Profiles
+      aci_rest:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        validate_certs: no
+        use_proxy: no        
+        path: /api/mo/uni.xml
+        method: post
+        content: |
+         <infraAccPortP ownerTag="" ownerKey=""  name="INT_PRO_LEAF_{{ item.leaf }}" dn="uni/infra/accportprof-INT_PRO_LEAF_{{ item.leaf }}" descr="" >
+          <infraHPortS ownerTag="" ownerKey="" name="INT_{{ iflist[1] }}" descr=""  type="range">
+           <infraRsAccBaseGrp tDn="uni/infra/funcprof/accportgrp-{{ item.ipg }}" fexId="101"/>
+            <infraPortBlk name="block2" descr="" toPort="{{ iflist[1] }}" toCard="1" fromPort="{{ iflist[1] }}" fromCard="1"/>
+           </infraHPortS>
+         </infraAccPortP>
+      with_items: "{{ datas.singleports }}"
+      vars:
+        iflist: "{{ item.port | split('/') }}"
+      tags: singleport,port,restore
+ 
+    - name: Set Access Interfaces to Interface Profiles VPC
+      aci_rest:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        validate_certs: no
+        use_proxy: no        
+        path: /api/mo/uni.xml
+        method: post
+        content: |
+         <infraHPortS annotation="" descr="" dn="uni/infra/accportprof-INT_PRO_LEAF_{{ item.leaf | replace('-','_')}}/hports-INT_{{ item.port | replace('/','_') }}-typ-range" name="INT_{{ item.port | replace('/','_') }}" nameAlias="" ownerKey="" ownerTag="" type="range">
+          <infraRsAccBaseGrp annotation="" fexId="101" tDn="uni/infra/funcprof/accbundle-{{ item.ipg }}_VPC_{{ item.leaf|replace('-','_') }}_{{ item.port|replace('/','_') }}"/>
+          <infraPortBlk annotation="" descr="" fromCard="1" fromPort="{{ iflist[1] }}" name="block2" nameAlias="" toCard="1" toPort="{{ iflist[1] }}"/>
+          </infraHPortS>
+      with_items: "{{ datas.vpcports }}"
+      vars:
+        iflist: "{{ item.port | split('/') }}"
+      tags: vpcport,port,bind_access_int_vpc,restore
+     
+    - name: Test filter epg tenant
+      debug:
+        msg: "{{ item }}"
+      delegate_to: localhost
+      with_items: "{{ datas.singleports | tenant_epgs_from_row }}"
+      tags: testfilter
+
+
+    - name: Query all EPGs
+      aci_epg:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        state: query
+        validate_certs: no
+      register: epgs_raw
+      tags: getepg,singleport,vpcport,port,restore
+ 
+    - name: Print all EPG RAW
+      debug:
+        msg: "{{ epgs_raw }}"
+      tags: getepg
+ 
+    - name: Set data EPG AP
+      set_fact:
+        epgs_ap: "{{ epgs_raw | set_epgs }}"
+      tags: getepg,singleport,vpcport,port,restore
+      
+    - name: Print all EPG  AP
+      debug:
+        msg: "{{ epgs_ap }}"
+      tags: getepg     
+      
+    - name: Deploy Static Path binding for given EPG
+      aci_static_binding_to_epg:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        validate_certs: no
+        use_proxy: no
+        tenant: "{{item.tenant}}"
+        ap: "{{epgs_ap[item.tenant][item.epg]}}"
+        epg: "{{item.epg}}"
+        encap_id: "{{item.vlan}}"
+        deploy_immediacy: immediate
+        interface_mode: "{{item.mode}}"
+        interface_type: switch_port
+        pod_id: "{{item.podid}}"
+        leafs: "{{item.leaf}}"
+        interface: '{{item.port}}'
+        state: present
+      delegate_to: localhost
+      with_items: "{{ datas.singleports|formatportdata }}"
+      tags: singleport,port,restore
+ 
+    - name: Deploy Static Path binding for given EPG VPC
+      aci_static_binding_to_epg:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        validate_certs: no
+        use_proxy: no
+        tenant: "{{item.tenant}}"
+        ap: "{{epgs_ap[item.tenant][item.epg]}}"
+        epg: "{{item.epg}}"
+        encap_id: "{{item.vlan}}"
+        deploy_immediacy: immediate
+        interface_mode: "{{item.mode}}"
+        interface_type: vpc
+        pod_id: "{{item.podid}}"
+        leafs: "{{item.leaf}}"
+        interface: "{{ item.ipg }}_VPC_{{ item.leaf|replace('-','_') }}_{{ item.port|replace('/','_') }}"
+        state: present
+      delegate_to: localhost
+      with_items: "{{ datas.vpcports|formatportdata }}"
+      tags: vpcport,port,restore 
+
+     
+      
+# ============================================================================================================================================================
+# bd subnet
+# ============================================================================================================================================================
+    - name: Create a subnet with options
+      cisco.aci.aci_bd_subnet:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        validate_certs: no
+        tenant: "{{item.tenant}}"
+        bd: "{{item.bd}}"
+        subnet_name: ""
+        gateway: "{{gwlist[0]}}"
+        mask: "{{gwlist[1]}}"
+        description: "{{item.description}}"
+        scope: "{{item.scope}}"
+        route_profile_l3_out: ""
+        route_profile: ""
+        state: present
+      delegate_to: localhost
+      with_items: "{{ datas.subnets }}"
+      vars:
+        gwlist: "{{ item.gateway | split('/') }}"
+      tags: subnet,restore 
+# ============================================================================================================================================================
+# CONTRACT
+#
+# ============================================================================================================================================================
+
+    - name: Add Filter via REST
+      aci_rest:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        validate_certs: no
+        path: /api/mo/uni.xml
+        method: post
+        content: |
+          <vzFilter annotation="" descr="" dn="uni/tn-{{ item.tenant }}/flt-{{ item.filtername }}" name="{{ item.filtername }}" nameAlias="" ownerKey="" ownerTag="">
+            <vzEntry annotation="" applyToFrag="no" arpOpc="unspecified" dFromPort="unspecified" dToPort="unspecified" descr="" etherT="unspecified" icmpv4T="unspecified" icmpv6T="unspecified" matchDscp="unspecified" name="{{ item.entryname }}" nameAlias="" prot="unspecified" sFromPort="unspecified" sToPort="unspecified" stateful="no" tcpRules="" /> 
+          </vzFilter>
+      with_items: "{{ datas.filters }}"   
+      tags: contract , filter , restore
+     
+ # =============================================================================================================================================================    
+ 
+    - name: Add Contract via REST
+      aci_rest:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        validate_certs: no
+        path: /api/mo/uni.xml
+        method: post
+        content: |
+          <vzBrCP descr="" dn="uni/tn-{{ item.tenant }}/brc-{{ item.ctname }}" name="{{ item.ctname }}" ownerKey="" ownerTag="" prio="unspecified" scope="context" targetDscp="unspecified">
+            <vzSubj consMatchT="AtleastOne" descr="" name="{{ item.ctname }}" prio="unspecified" provMatchT="AtleastOne" revFltPorts="no" targetDscp="unspecified">
+              <vzInTerm>
+                <vzRsFiltAtt action="permit" tnVzFilterName="{{ item.filtername }}" /> 
+              </vzInTerm>
+            </vzSubj>
+          </vzBrCP>
+      with_items: "{{ datas.contracts }}"   
+      tags: contract , restore
+
+    - name: Add Contract to Vzany via REST
+      aci_rest:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        validate_certs: no
+        path: /api/mo/uni.xml
+        method: post
+        content: |
+          <vzAny annotation="" descr="" dn="uni/tn-{{item.tenant}}/ctx-{{item.vrf}}/any" matchT="AtleastOne" name="" nameAlias="" prefGrMemb="disabled"><vzRsAnyToProv annotation="" matchT="AtleastOne" prio="unspecified" tnVzBrCPName="{{item.contract}}"/><vzRsAnyToCons annotation="" prio="unspecified" tnVzBrCPName="{{item.contract}}"/></vzAny>
+      with_items: "{{ datas.vzany }}"   
+      tags: contract , vzany, restore
+
+
+
+# ============================================================================================================================================================
+# L3OUT
+#
+# ============================================================================================================================================================
+
+    - name: Add L3Out with OSPF Enabled via REST
+      aci_rest:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        validate_certs: no
+        path: /api/mo/uni.xml
+        method: post
+        content: |
+          <l3extOut descr="" dn="uni/tn-{{ item.tenant }}/out-{{ item.l3outname }}" enforceRtctrl="export" name="{{ item.l3outname  }}">
+            <l3extRsL3DomAtt tDn="uni/l3dom-{{ item.domain }}"/>
+            <l3extRsEctx tnFvCtxName="{{ item.vrf }}"/>
+            <l3extInstP descr="" floodOnEncap="disabled" matchT="AtleastOne" name="{{ item.ext_epg }}" nameAlias="" prefGrMemb="exclude">
+              <l3extSubnet aggregate="" descr="" ip="{{ item.subnet }}" name="" nameAlias="" scope="{{ item.scope }}"/>
+              <fvRsCons prio="unspecified" tnVzBrCPName="{{ item.contract }}"/>
+              <fvRsProv matchT="AtleastOne" prio="unspecified" tnVzBrCPName="{{ item.contract }}"/>
+            </l3extInstP>
+            <ospfExtP annotation="" areaCost="1" areaCtrl="redistribute,summary" areaId="{{ item.areaid }}" areaType="{{ item.areatype }}" descr="" multipodInternal="no" nameAlias=""/>
+          </l3extOut>
+      with_items: "{{ datas.l3out_ospf }}"
+      tags: l3out_ospf,restore
+ 
+    - name: Add Nodes to L3Out via REST
+      aci_rest:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        validate_certs: no
+        path: /api/mo/uni.xml
+        method: post
+        content: |
+          <l3extOut descr="" dn="uni/tn-{{ item.tenant }}/out-{{ item.l3outname }}">
+            <l3extLNodeP configIssues="" descr="" name="{{ item.nodename }}">
+              <l3extRsNodeL3OutAtt rtrId="{{ item.routerid }}" rtrIdLoopBack="no" tDn="topology/pod-1/node-{{ item.node }}">
+              </l3extRsNodeL3OutAtt>
+            </l3extLNodeP>
+          </l3extOut>
+      with_items: "{{ datas.l3out_nodes}}"
+      tags: l3out_ospf , l3out_node , restore
+
+    - name: Add OSPF interface policy via REST
+      aci_rest:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        validate_certs: no
+        path: /api/mo/uni.xml
+        method: post
+        content: |
+          <ospfIfPol annotation="" cost="unspecified" ctrl="bfd" deadIntvl="{{item.dead}}" descr="" dn="uni/tn-{{item.tenant}}/ospfIfPol-{{item.polname}}" helloIntvl="{{item.hello}}" name="{{item.polname}}" nameAlias="" nwT="{{item.mode}}" ownerKey="" ownerTag="" pfxSuppress="inherit" prio="1" rexmitIntvl="5" xmitDelay="1"/>
+      with_items: "{{ datas.ospf_int_pol}}"
+      tags: l3out_ospf , ospf_int_pol , restore
+
+
+
+    - name: Add SubInts with OSPF to L3Out via REST
+      aci_rest:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        validate_certs: no
+        path: /api/mo/uni.xml
+        method: post
+        content: |
+          <l3extOut annotation="" descr="" dn="uni/tn-{{item.tenant}}/out-{{item.l3outname}}" enforceRtctrl="export" name="{{item.l3outname}}" nameAlias="" ownerKey="" ownerTag="" targetDscp="unspecified">
+            <l3extLNodeP annotation="" configIssues="" descr="" name="{{item.nodename}}" nameAlias="" ownerKey="" ownerTag="" tag="yellow-green" targetDscp="unspecified">
+              <l3extLIfP annotation="" descr="" name="{{item.subintname}}" nameAlias="" ownerKey="" ownerTag="" prio="unspecified" tag="yellow-green">
+                <ospfIfP annotation="" authKeyId="1" authType="none" descr="" name="" nameAlias=""><ospfRsIfPol annotation="" tnOspfIfPolName="{{item.ospf_int_pol}}"/></ospfIfP>
+                <l3extRsPathL3OutAtt addr="{{item.ip}}" annotation="" autostate="disabled" descr="" encap="vlan-{{item.dot1q}}" encapScope="local" ifInstT="sub-interface" ipv6Dad="enabled" llAddr="::" mac="00:22:BD:F8:19:FF" mode="regular" mtu="inherit" tDn="topology/pod-1/paths-{{item.node}}/pathep-[eth{{item.interface}}]" targetDscp="unspecified"/>
+              </l3extLIfP>
+            </l3extLNodeP>
+          </l3extOut>
+      with_items: "{{ datas.l3out_subint_ospf}}"
+      tags: l3out_ospf , l3out_subint_ospf , restore
+      
+    - name: Query All Bridge Domains
+      cisco.aci.aci_bd:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        validate_certs: no
+        state: query
+      delegate_to: localhost
+      register: bds_raw
+      tags: getbd,l3out_ospf,l3out , restore ,bind_l3out_bd
+      
+    - name: Print all BD RAW
+      debug:
+        msg: "{{ bds_raw }}"
+      tags: getbd
+ 
+    - name: Set data BD VRF
+      set_fact:
+        bds_vrf: "{{ bds_raw | set_bds }}"
+      tags: getbd,l3out_ospf,l3out, restore, bind_l3out_bd
+          
+    - name: Print all BD VRF
+      debug:
+        msg: "{{ bds_vrf }}"
+      tags: getbd   
+ 
+    - name: Get all subnets
+      cisco.aci.aci_bd_subnet:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        validate_certs: no
+        state: query
+      delegate_to: localhost
+      register: subnets_raw
+      tags: getsubnet,l3out_ospf,l3out,restore,,bind_l3out_bd
+
+    - name: Print all SUBNET RAW
+      debug:
+        msg: "{{ subnets_raw }}"
+      tags: getsubnet
+
+    - name: Set data SUBNET BD
+      set_fact:
+        subnets_bd: "{{ subnets_raw | set_subnets }}"
+      tags: getsubnet,l3out_ospf,l3out,restore,bind_l3out_bd
+      
+    - name: Print all BD VRF
+      debug:
+        msg: "{{ subnets_bd }}"
+      tags: getsubnet 
+
+    - name: Query L3Out information
+      cisco.aci.aci_l3out:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        validate_certs: no
+        state: query
+      delegate_to: localhost
+      register: l3outs_raw
+      tags: getl3out,l3out_ospf,l3out,restore,bind_l3out_bd
+ 
+    - name: Print all L3Out RAW
+      debug:
+        msg: "{{ l3outs_raw }}"
+      tags: getl3out
+
+    - name: Set data L3OUT VRF
+      set_fact:
+         l3outs_vrf: "{{ l3outs_raw | set_l3out }}"
+      tags: getl3out,l3out_ospf,l3out,restore,bind_l3out_bd
+
+    - name: Print all L3OUT VRF
+      debug:
+        msg: "{{ l3outs_vrf }}"
+      tags: getl3out       
+ 
+    - name: Add L3OUT to BD via REST
+      aci_rest:
+        host: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        validate_certs: no
+        path: /api/mo/uni.xml
+        method: post
+        content: |
+          <fvTenant  name="{{item.tenant}}">
+            <fvBD name="{{item.bd}}">
+            <fvRsBDToOut tnL3extOutName="{{item.l3out}}"/>
+            </fvBD>/>
+          </fvTenant>
+      with_items: "{{ l3outs_vrf | get_data_l3out(bds_vrf,subnets_bd)}}"
+      tags: l3out_ospf , bind_l3out_bd , restore
+      
+# ============================================================================================================================================================
+# Take a snaphot of current configuration
+# ============================================================================================================================================================
+
+    - name: wait before POST-SNAPSHOT
+      wait_for: timeout=8
+      tags: always,snapshot
+
+
+    - name: POST-SNAPSHOT
+      aci_rest:
+        validate_certs: no
+        use_proxy: no
+        hostname: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        method: post
+        path: /api/mo/uni.json
+        content: |
+         {"configExportP":{"attributes":{"dn":"uni/fabric/configexp-POST-{{ snapshot_tag }}",
+         "name":"POST-{{ snapshot_tag }}","snapshot":"true","adminSt":"triggered","descr":"{{ tag_change }}"}}}
+      tags: snapshot
+
+
+
+
+
+
+
+
+
+
